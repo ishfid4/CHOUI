@@ -1,35 +1,33 @@
 //
-// Created by ishfid on 12/12/15.
+// Created by ishfid on 12/23/15.
 //
 
-#ifndef CHOUI_ENTITY_H
-#define CHOUI_ENTITY_H
+#ifndef CHOUI_PLAYER_H
+#define CHOUI_PLAYER_H
 
+
+#include "AnimatedSprite.h"
 #include <SFML/Graphics.hpp>
 
-
-class Entity : public sf::Drawable, public sf::Transformable{
+class Entity : public AnimatedSprite{
 public:
+    Entity(std::string path, sf::Vector2f startingCoordinates);
+    ~Entity();
 
-    // add functions to play with the entity's geometry / colors / texturing...
+    Animation walkingAnimationUp;
+    Animation walkingAnimationRight;
+    Animation walkingAnimationLeft;
+    Animation walkingAnimationDown;
+    Animation* currentAnimation;
+    float speed;
+    sf::Texture entityTexture;
 
-private:
+    float healthPoints, manaPoints;
+    int level, experiance;
+    float defence, magicResist;
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const{
-        // apply the entity's transform -- combine it with the one that was passed by the caller
-        states.transform *= getTransform(); // getTransform() is defined by sf::Transformable
 
-        // apply the texture
-        states.texture = &m_texture;
-
-        // you may also override states.shader or states.blendMode if you want
-
-        // draw the vertex array
-        target.draw(m_vertices, states);
-    }
-
-    sf::VertexArray m_vertices;
-    sf::Texture m_texture;
 };
 
-#endif //CHOUI_ENTITY_H
+
+#endif //CHOUI_PLAYER_H

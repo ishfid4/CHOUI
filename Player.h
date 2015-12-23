@@ -2,28 +2,18 @@
 // Created by ishfid on 12/23/15.
 //
 
-#ifndef CHOUI_PLAYER_H
-#define CHOUI_PLAYER_H
+#ifndef CHOUI_NPC_H
+#define CHOUI_NPC_H
 
 
-#include "AnimatedSprite.h"
-#include <SFML/Graphics.hpp>
+#include "Entity.h"
 
-class Player : public AnimatedSprite{
+class Player : public Entity{
 public:
     Player(std::string path, sf::Vector2f startingCoordinates, sf::Vector2f viewCoordinates);
-    ~Player();
 
-    Animation walkingAnimationUp;
-    Animation walkingAnimationRight;
-    Animation walkingAnimationLeft;
-    Animation walkingAnimationDown;
-    Animation* currentAnimation;
-    AnimatedSprite animatedPlayerSprite;
     sf::View playerView;
-    float speed;
-    sf::Texture playerTexture;
 };
 
 
-#endif //CHOUI_PLAYER_H
+#endif //CHOUI_NPC_H

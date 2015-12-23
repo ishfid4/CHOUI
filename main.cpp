@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include "Animation.h"
 #include "AnimatedSprite.h"
+#include "Entity.h"
 #include "Player.h"
 
 using namespace std;
@@ -19,7 +20,7 @@ int main() {
     window.setFramerateLimit(60);
 
 
-    Player *player = new Player("assets/sprites/PLAYER.png", sf::Vector2f(400,300), sf::Vector2f(600,600));
+    Player *player = new Player("assets/sprites/PLAYER.png", sf::Vector2f(400, 300), sf::Vector2f(600, 600));
 /*
     sf::Texture playerTexture;
     if (!playerTexture.loadFromFile("assets/sprites/PLAYER.png"))
@@ -116,8 +117,8 @@ int main() {
             animatedPlayerSprite.stop();
         }
 */
-        player->animatedPlayerSprite.play(*player->currentAnimation);
-        player->animatedPlayerSprite.move(movement * frameTime.asSeconds());
+        player->play(*player->currentAnimation);
+        player->move(movement * frameTime.asSeconds());
         player->playerView.move(movement * frameTime.asSeconds());
 
         // if no key was pressed stop the animation
@@ -135,9 +136,8 @@ int main() {
         window.clear();
         window.setView(player->playerView);
         window.draw(tile_map);
-        window.draw(player->animatedPlayerSprite);
+        window.draw(*player);
         window.display();
     }
 }
 
-Player::~Player() { }
