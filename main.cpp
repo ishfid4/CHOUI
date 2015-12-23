@@ -77,6 +77,7 @@ int main() {
     playerView.setSize(600,600);
 */
     bool noKeyWasPressed = true;
+    sf::Clock frameClock; //for animation sync
 
     while (window.isOpen()) {
         sf::Event event;
@@ -85,7 +86,7 @@ int main() {
                 window.close();
         }
 
-        sf::Time frameTime = player->frameClock.restart();
+        sf::Time frameTime = frameClock.restart();
 
         // if a key was pressed set the correct animation and move correctly
         sf::Vector2f movement(0.f, 0.f);
@@ -106,17 +107,17 @@ int main() {
             movement.x += player->speed;
             noKeyWasPressed = false;
         }
-
-        //sf::Vector2f playerPosition = animatedPlayerSprite.getPosition();
-        //sf::FloatRect mapBoundingBox = tile_map.GetLayer("BoundingBox").GetTile(playerPosition.x,playerPosition.y).GetGlobalBounds();
-        //sf::FloatRect playerBoundingBox = animatedPlayerSprite.getGlobalBounds();
 /*
+        sf::Vector2f playerPosition = animatedPlayerSprite.getPosition();
+        sf::FloatRect mapBoundingBox = tile_map.GetLayer("BoundingBox").GetTile(playerPosition.x,playerPosition.y).GetGlobalBounds();
+        sf::FloatRect playerBoundingBox = animatedPlayerSprite.getGlobalBounds();
+
         if(playerBoundingBox.intersects(mapBoundingBox)){
             animatedPlayerSprite.stop();
         }
 */
-        player->play(*player->currentAnimation);
-        player->move(movement * frameTime.asSeconds());
+        player->animatedPlayerSprite.play(*player->currentAnimation);
+        player->animatedPlayerSprite.move(movement * frameTime.asSeconds());
         player->playerView.move(movement * frameTime.asSeconds());
 
         // if no key was pressed stop the animation
@@ -129,7 +130,6 @@ int main() {
         // update AnimatedSprite
         player->update(frameTime);
 
-        player->getPosition();
 
         //draw
         window.clear();
@@ -139,3 +139,5 @@ int main() {
         window.display();
     }
 }
+
+Player::~Player() { }

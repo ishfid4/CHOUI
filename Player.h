@@ -14,7 +14,6 @@ public:
     Player(std::string path, sf::Vector2f startingCoordinates, sf::Vector2f viewCoordinates);
     ~Player();
 
-    sf::Texture playerTexture;
     Animation walkingAnimationUp;
     Animation walkingAnimationRight;
     Animation walkingAnimationLeft;
@@ -22,8 +21,8 @@ public:
     Animation* currentAnimation;
     AnimatedSprite animatedPlayerSprite;
     sf::View playerView;
-    sf::Clock frameClock;
     float speed;
+    sf::Texture playerTexture;
 };
 
 
