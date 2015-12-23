@@ -40,7 +40,7 @@ Player::Player(std::string path, sf::Vector2f startingCoordinates, sf::Vector2f 
     animatedPlayerSprite = AnimatedSprite(sf::seconds(0.2), true, false);
     animatedPlayerSprite.setPosition(startingCoordinates); //Add coordinates in different way
 
-    float speed = 100.f;
+    speed = 100.f;
 
     // creating player Viewport
     playerView.setCenter(sf::Vector2f(startingCoordinates));
