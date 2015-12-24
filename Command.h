@@ -5,15 +5,13 @@
 #ifndef CHOUI_COMMAND_H
 #define CHOUI_COMMAND_H
 
-
 #include "Player.h"
-#include "InputHandler.h"
 
 class Command{
 public:
     Command();
     virtual ~Command(){};
-    virtual void execute(Player& player, sf::Time frameTime) = 0;
+    virtual void execute(Player& player, sf::Time frameTime, sf::Vector2f movement = sf::Vector2f(0.f,0.f)) = 0;
     sf::Vector2f movement;
 };
 

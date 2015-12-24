@@ -4,6 +4,14 @@
 
 #include "InputHandler.h"
 
+InputHandler::InputHandler() {
+    buttonUP_ = new UpCommand;
+    buttonDOWN_ = new DownCommand;
+    buttonRIGHT_ = new RightCommand;
+    buttonLEFT_ = new LeftCommand;
+    noButton_ = new NoKeyCommand;
+}
+
 Command* InputHandler::handleInput(Player& player) {/*
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         buttonUP_->execute(player, movement, frameTime);

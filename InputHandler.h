@@ -8,10 +8,12 @@
 
 #include "Command.h"
 
-class InputHandler : public Command{
+class InputHandler{
 public:
+    InputHandler();
     Command* handleInput(Player& player);
-    sf::Vector2f movement;
+    virtual void execute(Player& player, sf::Time frameTime, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){}
+    //sf::Vector2f movement;
 
 private:
     UpCommand* buttonUP_;

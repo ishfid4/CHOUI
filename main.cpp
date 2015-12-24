@@ -23,7 +23,7 @@ int main() {
     bool noKeyWasPressed = true;
     sf::Clock frameClock; //for animation sync
 
-    InputHandler inputHandler;
+
 
     while (window.isOpen()) {
         sf::Event event;
@@ -31,7 +31,7 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
+        InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
         Command* command = inputHandler.handleInput(*player);
         if(command)

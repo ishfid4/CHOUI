@@ -10,8 +10,7 @@ include_directories(${SFML_INCLUDE_DIR})
 add_subdirectory(${CMAKE_SOURCE_DIR}/deps)
 include_directories(${CMAKE_SOURCE_DIR}/deps/STP/include)
 
-add_definitions("-Wall -g")
-
+add_definitions("-Wall -g -Wfatal-errors")
 
 set(SOURCE_FILES main.cpp Entity.cpp Entity.h Animation.cpp Animation.h AnimatedSprite.cpp AnimatedSprite.h Player.cpp Player.h Mob.cpp Mob.h NPC.cpp NPC.h Command.cpp Command.h InputHandler.cpp InputHandler.h)
 add_executable(CHOUI ${SOURCE_FILES})
