@@ -10,6 +10,7 @@ Entity::Entity(std::string path, sf::Vector2f startingCoordinates) : AnimatedSpr
         std::cout << "Failed to load entity spritesheet!" << std::endl;
     }
 
+
     walkingAnimationDown.setSpriteSheet(entityTexture);
     walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
     walkingAnimationDown.addFrame(sf::IntRect(64, 0, 32, 32));

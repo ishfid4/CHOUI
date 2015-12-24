@@ -4,10 +4,8 @@
 #include <STP/TMXLoader.hpp>
 
 #include "Entity.h"
-#include "Animation.h"
-#include "AnimatedSprite.h"
-#include "Entity.h"
 #include "Player.h"
+#include "InputHandler.h"
 
 using namespace std;
 
@@ -21,64 +19,11 @@ int main() {
 
 
     Player *player = new Player("assets/sprites/PLAYER.png", sf::Vector2f(400, 300), sf::Vector2f(600, 600));
-/*
-    sf::Texture playerTexture;
-    if (!playerTexture.loadFromFile("assets/sprites/PLAYER.png"))
-    {
-        std::cout << "Failed to load player spritesheet!" << std::endl;
-        return 1;
-    }
 
-
-    // set up the animations for all four directions (set spritesheet and push frames)
-    Animation walkingAnimationDown;
-    walkingAnimationDown.setSpriteSheet(playerTexture);
-    walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
-    walkingAnimationDown.addFrame(sf::IntRect(64, 0, 32, 32));
-    walkingAnimationDown.addFrame(sf::IntRect(32, 0, 32, 32));
-    walkingAnimationDown.addFrame(sf::IntRect( 0, 0, 32, 32));
-
-    Animation walkingAnimationLeft;
-    walkingAnimationLeft.setSpriteSheet(playerTexture);
-    walkingAnimationLeft.addFrame(sf::IntRect(32, 32, 32, 32));
-    walkingAnimationLeft.addFrame(sf::IntRect(64, 32, 32, 32));
-    walkingAnimationLeft.addFrame(sf::IntRect(32, 32, 32, 32));
-    walkingAnimationLeft.addFrame(sf::IntRect( 0, 32, 32, 32));
-
-    Animation walkingAnimationRight;
-    walkingAnimationRight.setSpriteSheet(playerTexture);
-    walkingAnimationRight.addFrame(sf::IntRect(32, 64, 32, 32));
-    walkingAnimationRight.addFrame(sf::IntRect(64, 64, 32, 32));
-    walkingAnimationRight.addFrame(sf::IntRect(32, 64, 32, 32));
-    walkingAnimationRight.addFrame(sf::IntRect( 0, 64, 32, 32));
-
-    Animation walkingAnimationUp;
-    walkingAnimationUp.setSpriteSheet(playerTexture);
-    walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
-    walkingAnimationUp.addFrame(sf::IntRect(64, 96, 32, 32));
-    walkingAnimationUp.addFrame(sf::IntRect(32, 96, 32, 32));
-    walkingAnimationUp.addFrame(sf::IntRect( 0, 96, 32, 32));
-
-
-    Animation* currentAnimation = &walkingAnimationDown;
-
-    // set up AnimatedSprite
-    AnimatedSprite animatedPlayerSprite(sf::seconds(0.2), true, false);
-    animatedPlayerSprite.setPosition(sf::Vector2f(screenDimensions / 2));
-
-    sf::Clock frameClock;
-
-    float speed = 100.f;
-    bool noKeyWasPressed = true;
-
-
-    // creating player Viewport
-    sf::View playerView;
-    playerView.setCenter(sf::Vector2f(screenDimensions / 2));
-    playerView.setSize(600,600);
-*/
     bool noKeyWasPressed = true;
     sf::Clock frameClock; //for animation sync
+
+    InputHandler inputHandler;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -88,7 +33,11 @@ int main() {
         }
 
         sf::Time frameTime = frameClock.restart();
+        Command* command = inputHandler.handleInput(*player);
+        if(command)
+            command->execute(*player,frameTime);
 
+/*
         // if a key was pressed set the correct animation and move correctly
         sf::Vector2f movement(0.f, 0.f);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
@@ -108,6 +57,7 @@ int main() {
             movement.x += player->speed;
             noKeyWasPressed = false;
         }
+*/
 /*
         sf::Vector2f playerPosition = animatedPlayerSprite.getPosition();
         sf::FloatRect mapBoundingBox = tile_map.GetLayer("BoundingBox").GetTile(playerPosition.x,playerPosition.y).GetGlobalBounds();
@@ -117,6 +67,8 @@ int main() {
             animatedPlayerSprite.stop();
         }
 */
+
+        /*
         player->play(*player->currentAnimation);
         player->move(movement * frameTime.asSeconds());
         player->playerView.move(movement * frameTime.asSeconds());
@@ -130,7 +82,10 @@ int main() {
 
         // update AnimatedSprite
         player->update(frameTime);
-
+*/
+        //test
+        sf::Vector2f plcoor = player->getPosition();
+        cout<<plcoor.x<<" "<<plcoor.y<<"\n";
 
         //draw
         window.clear();
