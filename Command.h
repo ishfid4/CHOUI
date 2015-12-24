@@ -66,6 +66,7 @@ public:
 class NoKeyCommand : public Command{
 public:
     virtual void execute(Player& player, sf::Time frameTime,  sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+        player.play(*player.currentAnimation);
         player.stop();
         player.update(frameTime);
     }
