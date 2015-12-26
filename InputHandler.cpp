@@ -12,18 +12,7 @@ InputHandler::InputHandler() {
     noButton_ = new NoKeyCommand;
 }
 
-Command* InputHandler::handleInput(Player& player) {/*
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        buttonUP_->execute(player, movement, frameTime);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        buttonDOWN_->execute(player, movement, frameTime);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        buttonRIGHT_->execute(player, movement, frameTime);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        buttonLEFT_->execute(player, movement, frameTime);
-
-    noButton_->execute(player, frameTime);
-*/
+Command* InputHandler::handleInput(Player& player) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         return buttonUP_;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))

@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include "InputHandler.h"
+#include "Collision.h"
 
 using namespace std;
 
@@ -21,7 +22,7 @@ int main() {
 
     Player *player = new Player("assets/sprites/PLAYER.png", sf::Vector2f(400, 300), sf::Vector2f(600, 600));
 
-    bool noKeyWasPressed = true;
+    //bool noKeyWasPressed = true;
     sf::Clock frameClock; //for animation sync
 
     while (window.isOpen()) {
@@ -30,24 +31,35 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
+        Collision collision;
         InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
         Command* command = inputHandler.handleInput(*player);
+        command = collision.testPlayerCollision(tileMap, *player, command);
+        command->execute(*player,frameTime);
+/*
         if(command)
             command->execute(*player,frameTime);
-
+            */
 /*
         sf::Vector2f playerPosition = player->getPosition();
-        sf::FloatRect mapBoundingBox = tileMap.GetLayer("BoundingBox").;
+        int x,y;
+        x = (int)(floor(playerPosition.x))/32;
+        y = (int)(floor(playerPosition.y))/32;
+        string sth = tileMap.GetLayer("Ground").GetTile(x,y).GetPropertyValue("Collidable");
         sf::FloatRect playerBoundingBox = player->getGlobalBounds();
-
-        if(playerBoundingBox.intersects(mapBoundingBox)){
+        cout<<sth<<endl;
+        */
+/*
+        if(playerBoundingBox.intersects(){
             player->stop();
         }
 */
         //test
-        sf::Vector2f plcoor = player->getPosition();
-        cout<<plcoor.x<<" "<<plcoor.y<<"\n";
+        //sf::Vector2f plcoor = player->getPosition();
+        //cout<<plcoor.x<<" "<<plcoor.y<<"\n";
+//        cout<<x<<" "<<y<<endl;
 
         //draw
         window.clear();
