@@ -9,49 +9,43 @@ Collision::Collision() {
     noKey = new NoKeyCommand;
 }
 
-Command* Collision::testPlayerCollision(tmx::TileMap& tileMap, Player& player, Command* command) {
-    sf::Vector2f playerPosition = player.getPosition();
-    std::string collidable;
-    int x,y;
-    x = (int)(floor(playerPosition.x))/32;
-    y = (int)(floor(playerPosition.y))/32;
+Command* Collision::testPlayerCollision(tmx::TileMap& tileMap, Player& player, Command& command) {
+    player.play(*player.currentAnimation); //DAFUQ??? otherwise game will crash
+    sf::FloatRect playerBoundingBox = player.getGlobalBounds();
 
-    //std::cout<<typeid(command).name()<<" "<<typeid(NoKeyCommand).name()<<std::endl;
-    //if(typeid(command).name() == typeid(UpCommand).name())
+    sf::Vector2f playerPosition = player.getPosition();
+    float x = playerPosition.x/32;
+    float y = playerPosition.y/32;
+
+    sf::FloatRect tileBoundingBoxLeftTop = tileMap.GetLayer("Ground").GetTile(x,y).GetGlobalBounds();
+    sf::FloatRect tileBoundingBoxRightTop = tileMap.GetLayer("Ground").GetTile(x+1,y).GetGlobalBounds();
+    sf::FloatRect tileBoundingBoxLeftBottom = tileMap.GetLayer("Ground").GetTile(x,y+1).GetGlobalBounds();
+    sf::FloatRect tileBoundingBoxRightBottom = tileMap.GetLayer("Ground").GetTile(x+1,y+1).GetGlobalBounds();
+
+    std::string collidableLeftTop = tileMap.GetLayer("Ground").GetTile(x,y).GetPropertyValue("Collidable");
+    std::string collidableRightTop = tileMap.GetLayer("Ground").GetTile(x+1,y).GetPropertyValue("Collidable");
+    std::string collidableLeftBottom = tileMap.GetLayer("Ground").GetTile(x,y+1).GetPropertyValue("Collidable");
+    std::string collidableRightBottom = tileMap.GetLayer("Ground").GetTile(x+1,y+1).GetPropertyValue("Collidable");
+
     if(typeid(command).name() == typeid(UpCommand).name()){
-        collidable = tileMap.GetLayer("Ground").GetTile(x,y+1).GetPropertyValue("Collidable");
-        std::cout<<"UP"<<std::endl;
-        if(collidable == "1"){
-            //return command;
+        if((collidableLeftTop == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftTop)) || (collidableRightTop == "1" && playerBoundingBox.intersects(tileBoundingBoxRightTop)))
             return noKey;
-        }
     }
+
     if(typeid(command).name() == typeid(DownCommand).name()) {
-        collidable = tileMap.GetLayer("Ground").GetTile(x, y - 1).GetPropertyValue("Collidable");
-        std::cout<<"Down"<<std::endl;
-        if (collidable == "1") {
+        if((collidableLeftBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftBottom)) || (collidableRightBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxRightBottom)))
             return noKey;
-            //return command;
-        }
     }
 
     if(typeid(command).name() == typeid(RightCommand).name()) {
-        collidable = tileMap.GetLayer("Ground").GetTile(x + 1, y).GetPropertyValue("Collidable");
-        std::cout<<"Right"<<std::endl;
-        if (collidable == "1") {
+        if((collidableRightTop == "1" && playerBoundingBox.intersects(tileBoundingBoxRightTop)) || (collidableRightBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxRightBottom)))
             return noKey;
-            //return command;
-        }
     }
 
     if(typeid(command).name() == typeid(LeftCommand).name()) {
-        collidable = tileMap.GetLayer("Ground").GetTile(x - 1, y).GetPropertyValue("Collidable");
-        std::cout<<"Left"<<std::endl;
-        if (collidable == "1") {
+        if((collidableLeftTop == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftTop)) || (collidableLeftBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftBottom)))
             return noKey;
-            //return command;
-        }
     }
-    std::cout<<"Last"<<std::endl;
-    return command;
+
+    return &command;
 }

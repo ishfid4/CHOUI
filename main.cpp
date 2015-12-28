@@ -21,7 +21,6 @@ int main() {
     tileMap.ShowObjects();
 
     Player *player = new Player("assets/sprites/PLAYER.png", sf::Vector2f(400, 300), sf::Vector2f(600, 600));
-
     //bool noKeyWasPressed = true;
     sf::Clock frameClock; //for animation sync
 
@@ -31,31 +30,13 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
         Collision collision;
         InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
         Command* command = inputHandler.handleInput(*player);
-        command = collision.testPlayerCollision(tileMap, *player, command);
+        command = collision.testPlayerCollision(tileMap, *player, *command);
         command->execute(*player,frameTime);
-/*
-        if(command)
-            command->execute(*player,frameTime);
-            */
-/*
-        sf::Vector2f playerPosition = player->getPosition();
-        int x,y;
-        x = (int)(floor(playerPosition.x))/32;
-        y = (int)(floor(playerPosition.y))/32;
-        string sth = tileMap.GetLayer("Ground").GetTile(x,y).GetPropertyValue("Collidable");
-        sf::FloatRect playerBoundingBox = player->getGlobalBounds();
-        cout<<sth<<endl;
-        */
-/*
-        if(playerBoundingBox.intersects(){
-            player->stop();
-        }
-*/
+
         //test
         //sf::Vector2f plcoor = player->getPosition();
         //cout<<plcoor.x<<" "<<plcoor.y<<"\n";

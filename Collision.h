@@ -13,7 +13,7 @@
 class Collision{
 public:
     Collision();
-    Command* testPlayerCollision(tmx::TileMap& tileMap, Player& player, Command* command);
+    Command* testPlayerCollision(tmx::TileMap& tileMap, Player& player, Command& command);
 
 private:
     NoKeyCommand* noKey;

@@ -8,36 +8,156 @@
    <terrain name="Cobblestone" tile="33"/>
    <terrain name="Dirt" tile="14"/>
   </terraintypes>
-  <tile id="0" terrain="0,0,0,1"/>
-  <tile id="1" terrain="0,0,1,1"/>
-  <tile id="2" terrain="0,0,1,0"/>
-  <tile id="3" terrain="3,3,3,0"/>
-  <tile id="4" terrain="3,3,0,3"/>
-  <tile id="5" terrain="0,0,0,3"/>
-  <tile id="6" terrain="0,0,3,3"/>
-  <tile id="7" terrain="0,0,3,0"/>
-  <tile id="8" terrain="0,1,0,1"/>
-  <tile id="9" terrain="1,1,1,1"/>
-  <tile id="10" terrain="1,0,1,0"/>
-  <tile id="11" terrain="3,0,3,3"/>
-  <tile id="12" terrain="0,3,3,3"/>
-  <tile id="13" terrain="0,3,0,3"/>
-  <tile id="14" terrain="3,3,3,3"/>
-  <tile id="15" terrain="3,0,3,0"/>
-  <tile id="16" terrain="0,1,0,0"/>
-  <tile id="17" terrain="1,1,0,0"/>
-  <tile id="18" terrain="1,0,0,0"/>
-  <tile id="19" terrain="1,1,1,0"/>
-  <tile id="20" terrain="1,1,0,1"/>
-  <tile id="21" terrain="0,3,0,0"/>
-  <tile id="22" terrain="3,3,0,0"/>
-  <tile id="23" terrain="3,0,0,0"/>
-  <tile id="24" terrain="0,0,0,2"/>
-  <tile id="25" terrain="0,0,2,2"/>
-  <tile id="26" terrain="0,0,2,0"/>
-  <tile id="27" terrain="1,0,1,1"/>
-  <tile id="28" terrain="0,1,1,1"/>
-  <tile id="29" terrain="0,0,0,0"/>
+  <tile id="0" terrain="0,0,0,1">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="1" terrain="0,0,1,1">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="2" terrain="0,0,1,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="3" terrain="3,3,3,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="4" terrain="3,3,0,3">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="5" terrain="0,0,0,3">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="6" terrain="0,0,3,3">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="7" terrain="0,0,3,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="8" terrain="0,1,0,1">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="9" terrain="1,1,1,1">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="10" terrain="1,0,1,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="11" terrain="3,0,3,3">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="12" terrain="0,3,3,3">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="13" terrain="0,3,0,3">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="14" terrain="3,3,3,3">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="15" terrain="3,0,3,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="16" terrain="0,1,0,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="17" terrain="1,1,0,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="18" terrain="1,0,0,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="19" terrain="1,1,1,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="20" terrain="1,1,0,1">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="21" terrain="0,3,0,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="22" terrain="3,3,0,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="23" terrain="3,0,0,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="24" terrain="0,0,0,2">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="25" terrain="0,0,2,2">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="26" terrain="0,0,2,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="27" terrain="1,0,1,1">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="28" terrain="0,1,1,1">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="29" terrain="0,0,0,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
   <tile id="30" terrain="0,0,0,0" probability="0.01">
    <properties>
     <property name="Collidable" value="1"/>
@@ -54,11 +174,31 @@
     <object id="0" x="0" y="0" width="32" height="32"/>
    </objectgroup>
   </tile>
-  <tile id="32" terrain="0,2,0,2"/>
-  <tile id="33" terrain="2,2,2,2"/>
-  <tile id="34" terrain="2,0,2,0"/>
-  <tile id="35" terrain="2,2,2,0"/>
-  <tile id="36" terrain="2,2,0,2"/>
+  <tile id="32" terrain="0,2,0,2">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="33" terrain="2,2,2,2">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="34" terrain="2,0,2,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="35" terrain="2,2,2,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="36" terrain="2,2,0,2">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
   <tile id="37" terrain="0,0,0,0" probability="0.01">
    <properties>
     <property name="Collidable" value="1"/>
@@ -83,11 +223,31 @@
     <object id="0" x="0" y="0" width="32" height="32"/>
    </objectgroup>
   </tile>
-  <tile id="40" terrain="0,2,0,0"/>
-  <tile id="41" terrain="2,2,0,0"/>
-  <tile id="42" terrain="2,0,0,0"/>
-  <tile id="43" terrain="2,0,2,2"/>
-  <tile id="44" terrain="0,2,2,2"/>
+  <tile id="40" terrain="0,2,0,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="41" terrain="2,2,0,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="42" terrain="2,0,0,0">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="43" terrain="2,0,2,2">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
+  <tile id="44" terrain="0,2,2,2">
+   <properties>
+    <property name="Collidable" value="0"/>
+   </properties>
+  </tile>
   <tile id="45" terrain="0,0,0,0" probability="0">
    <properties>
     <property name="Collidable" value="1"/>
@@ -118,7 +278,7 @@
    <property name="Collidable" value="0"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmGkPgjAMhqd88Eo8E/GIijee+P9/nTVCIE0DY261Gj48kSUje3xboXGplFo6pAv0gL7jc0y4E34rAV6/kt8rqzHgAxMBPhQ1oA54yNv2OSEwBWYlmAMtoA10GLJYA5sSbB36hTl+O+AM7L/oR/muM+fq5MnhdyDy+7bfA3lhv6t69/+N2Q/3HF4X5YX70oYf9TsIUX7JdZEfztVWfke0TnzK5ue6vtgTc4rrp8vFgl8jpqnSd1Eenua+hMWHfj2VzhfJd82jo7mPus/Ez1fpfDEAhgWMNPdR97nsPW4CRc85kjwDRh+T2YzD6x5/6jw7s++fraXzddHxezk94r2cfpFAP9zX0vxM6pudL7j8ohJ+OEtp+VG1luzHmZ/JbMbp9y8EAhx+BZyVtP8GqxpXVHzGE4L2t+M=
+   eJztmH9vgjAQhutIZM5EnSbitkxBp+Iv9Pt/ur3LaCCXphRsj2r444mCJX1874SLSyHE0iEjMAYTx/vo6IMQvJLzmcJv1YKfLiMf8puDCCzI+ZXmM1/ogRcQEG/b+6TgA3zW4AsMwBsYMmSRgHUNNg79Uo3fDziCbYt+Kt+ktK9Jnhx+O0V+bfvdiBf1O4v//r8w+9Geo8dVedG+tOGn+h2kJD/5vsqP5morvz05lj5183NdX+pJOeT1M+VkwS8Uxewhn0U6AsN1ku87/caimC/kd9UxNFynuq6JXySK+eIdTCuYGa5TXeey97iJhXrO8ckzZvRpMptxeGX5q8m9s/z82Vja3xQTvz+nW76W0+/qoR/ta9/8mtS3PF9w+V1r+NEsfctPVWuf/TjzazKbcfo9C7EHDo8CzaqN/wa7Gnd0uOMXA+K3XA==
   </data>
  </layer>
 </map>
