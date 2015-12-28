@@ -20,8 +20,8 @@ int main() {
     tmx::TileMap tileMap("assets/maps/desert/desert.tmx");
     tileMap.ShowObjects();
 
+    //creating player
     Player *player = new Player("assets/sprites/PLAYER.png", sf::Vector2f(400, 300), sf::Vector2f(600, 600));
-    //bool noKeyWasPressed = true;
     sf::Clock frameClock; //for animation sync
 
     while (window.isOpen()) {
@@ -30,17 +30,12 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        Collision collision;
+        Collision obstructCollision(tileMap, *player, "Ground", "Collidable");
         InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
         Command* command = inputHandler.handleInput(*player);
-        command = collision.testPlayerCollision(tileMap, *player, *command);
+        command = obstructCollision.testObstructPlayerCollision(*command);
         command->execute(*player,frameTime);
-
-        //test
-        //sf::Vector2f plcoor = player->getPosition();
-        //cout<<plcoor.x<<" "<<plcoor.y<<"\n";
-//        cout<<x<<" "<<y<<endl;
 
         //draw
         window.clear();

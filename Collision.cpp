@@ -5,45 +5,45 @@
 #include <iostream>
 #include "Collision.h"
 
-Collision::Collision() {
+Collision::Collision(tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName) {
     noKey = new NoKeyCommand;
+
+    player.play(*player.currentAnimation); //DAFUQ??? otherwise game will crash
+    playerBoundingBox = player.getGlobalBounds();
+
+    playerPosition = player.getPosition();
+    x = playerPosition.x/32;
+    y = playerPosition.y/32;
+
+    tileBoundingBoxLeftTop = tileMap.GetLayer(layer).GetTile(x,y).GetGlobalBounds();
+    tileBoundingBoxRightTop = tileMap.GetLayer(layer).GetTile(x+1,y).GetGlobalBounds();
+    tileBoundingBoxLeftBottom = tileMap.GetLayer(layer).GetTile(x,y+1).GetGlobalBounds();
+    tileBoundingBoxRightBottom = tileMap.GetLayer(layer).GetTile(x+1,y+1).GetGlobalBounds();
+
+    collisionLeftTop = tileMap.GetLayer(layer).GetTile(x,y).GetPropertyValue(propertyName);
+    collisionRightTop = tileMap.GetLayer(layer).GetTile(x+1,y).GetPropertyValue(propertyName);
+    collisionLeftBottom = tileMap.GetLayer(layer).GetTile(x,y+1).GetPropertyValue(propertyName);
+    collisionRightBottom = tileMap.GetLayer(layer).GetTile(x+1,y+1).GetPropertyValue(propertyName);
 }
 
-Command* Collision::testPlayerCollision(tmx::TileMap& tileMap, Player& player, Command& command) {
-    player.play(*player.currentAnimation); //DAFUQ??? otherwise game will crash
-    sf::FloatRect playerBoundingBox = player.getGlobalBounds();
-
-    sf::Vector2f playerPosition = player.getPosition();
-    float x = playerPosition.x/32;
-    float y = playerPosition.y/32;
-
-    sf::FloatRect tileBoundingBoxLeftTop = tileMap.GetLayer("Ground").GetTile(x,y).GetGlobalBounds();
-    sf::FloatRect tileBoundingBoxRightTop = tileMap.GetLayer("Ground").GetTile(x+1,y).GetGlobalBounds();
-    sf::FloatRect tileBoundingBoxLeftBottom = tileMap.GetLayer("Ground").GetTile(x,y+1).GetGlobalBounds();
-    sf::FloatRect tileBoundingBoxRightBottom = tileMap.GetLayer("Ground").GetTile(x+1,y+1).GetGlobalBounds();
-
-    std::string collidableLeftTop = tileMap.GetLayer("Ground").GetTile(x,y).GetPropertyValue("Collidable");
-    std::string collidableRightTop = tileMap.GetLayer("Ground").GetTile(x+1,y).GetPropertyValue("Collidable");
-    std::string collidableLeftBottom = tileMap.GetLayer("Ground").GetTile(x,y+1).GetPropertyValue("Collidable");
-    std::string collidableRightBottom = tileMap.GetLayer("Ground").GetTile(x+1,y+1).GetPropertyValue("Collidable");
-
+Command* Collision::testObstructPlayerCollision(Command& command) {
     if(typeid(command).name() == typeid(UpCommand).name()){
-        if((collidableLeftTop == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftTop)) || (collidableRightTop == "1" && playerBoundingBox.intersects(tileBoundingBoxRightTop)))
+        if((collisionLeftTop == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftTop)) || (collisionRightTop == "1" && playerBoundingBox.intersects(tileBoundingBoxRightTop)))
             return noKey;
     }
 
     if(typeid(command).name() == typeid(DownCommand).name()) {
-        if((collidableLeftBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftBottom)) || (collidableRightBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxRightBottom)))
+        if((collisionLeftBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftBottom)) || (collisionRightBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxRightBottom)))
             return noKey;
     }
 
     if(typeid(command).name() == typeid(RightCommand).name()) {
-        if((collidableRightTop == "1" && playerBoundingBox.intersects(tileBoundingBoxRightTop)) || (collidableRightBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxRightBottom)))
+        if((collisionRightTop == "1" && playerBoundingBox.intersects(tileBoundingBoxRightTop)) || (collisionRightBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxRightBottom)))
             return noKey;
     }
 
     if(typeid(command).name() == typeid(LeftCommand).name()) {
-        if((collidableLeftTop == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftTop)) || (collidableLeftBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftBottom)))
+        if((collisionLeftTop == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftTop)) || (collisionLeftBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftBottom)))
             return noKey;
     }
 
