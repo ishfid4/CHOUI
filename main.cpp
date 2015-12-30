@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "InputHandler.h"
 #include "Collision.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -23,6 +24,8 @@ int main() {
     //creating player
     Player *player = new Player("assets/sprites/PLAYER.png", sf::Vector2f(400, 300), sf::Vector2f(600, 600));
     sf::Clock frameClock; //for animation sync
+
+    Item *it1 = new Item("assets/sprites/items/sword.png",sf::Vector2f(400,200),0,0);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -41,6 +44,7 @@ int main() {
         window.clear();
         window.setView(player->playerView);
         window.draw(tileMap);
+        window.draw(*it1);
         window.draw(*player);
         window.display();
     }
