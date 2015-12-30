@@ -7,15 +7,14 @@
 
 
 
-Item::Item(std::string path, sf::Vector2f position, int id1, int typeIt) {
+Item::Item(std::string path, sf::Vector2f position) {
     if (!m_texture.loadFromFile(path)) {
         std::cout << "Failed to load entity spritesheet!" << std::endl;
     }
     setTexture(m_texture);
     setPosition(position);
 
-    id = id1;
-    itemType = typeIt;
+    boundingBox = getGlobalBounds();
 }
 
 Item::~Item() { }

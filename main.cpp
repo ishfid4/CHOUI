@@ -25,7 +25,7 @@ int main() {
     Player *player = new Player("assets/sprites/PLAYER.png", sf::Vector2f(400, 300), sf::Vector2f(600, 600));
     sf::Clock frameClock; //for animation sync
 
-    Item *it1 = new Item("assets/sprites/items/sword.png",sf::Vector2f(400,200),0,0);
+    Item *it1 = new Item("assets/sprites/items/sword.png",sf::Vector2f(400,200));
 
     while (window.isOpen()) {
         sf::Event event;
