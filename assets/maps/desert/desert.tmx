@@ -273,12 +273,115 @@
    </objectgroup>
   </tile>
  </tileset>
+ <tileset firstgid="49" name="Weapons" tilewidth="32" tileheight="32" tilecount="3">
+  <image source="../../sprites/items/weapons.png" width="96" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="intReq" value="4"/>
+    <property name="magicDMG" value="9"/>
+    <property name="physicalDMG" value="0"/>
+    <property name="strReq" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="intReq" value="1"/>
+    <property name="magicDMG" value="0"/>
+    <property name="physicalDMG" value="10"/>
+    <property name="strReq" value="5"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="intReq" value="2"/>
+    <property name="magicDMG" value="2"/>
+    <property name="physicalDMG" value="9"/>
+    <property name="strReq" value="4"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="52" name="Armor" tilewidth="32" tileheight="32" tilecount="8">
+  <image source="../../sprites/items/armor.png" width="256" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="armorType" value="chest"/>
+    <property name="intReq" value="1"/>
+    <property name="magicRes" value="3"/>
+    <property name="physicalRes" value="5"/>
+    <property name="strReq" value="2"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="armorType" value="chest"/>
+    <property name="intReq" value="1"/>
+    <property name="magicRes" value="3"/>
+    <property name="physicalRes" value="5"/>
+    <property name="strReq" value="2"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="armorType" value="chest"/>
+    <property name="intReq" value="1"/>
+    <property name="magicRes" value="3"/>
+    <property name="physicalRes" value="5"/>
+    <property name="strReq" value="2"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="armorType" value="chest"/>
+    <property name="intReq" value="1"/>
+    <property name="magicRes" value="3"/>
+    <property name="physicalRes" value="5"/>
+    <property name="strReq" value="2"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="armorType" value="chest"/>
+    <property name="intReq" value="1"/>
+    <property name="magicRes" value="3"/>
+    <property name="physicalRes" value="5"/>
+    <property name="strReq" value="2"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="armorType" value="chest"/>
+    <property name="intReq" value="1"/>
+    <property name="magicRes" value="3"/>
+    <property name="physicalRes" value="5"/>
+    <property name="strReq" value="2"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="armorType" value="chest"/>
+    <property name="intReq" value="1"/>
+    <property name="magicRes" value="3"/>
+    <property name="physicalRes" value="5"/>
+    <property name="strReq" value="2"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="Ground" width="40" height="40">
   <properties>
    <property name="Collidable" value="0"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJztmH9vgjAQhutIZM5EnSbitkxBp+Iv9Pt/ur3LaCCXphRsj2r444mCJX1874SLSyHE0iEjMAYTx/vo6IMQvJLzmcJv1YKfLiMf8puDCCzI+ZXmM1/ogRcQEG/b+6TgA3zW4AsMwBsYMmSRgHUNNg79Uo3fDziCbYt+Kt+ktK9Jnhx+O0V+bfvdiBf1O4v//r8w+9Geo8dVedG+tOGn+h2kJD/5vsqP5morvz05lj5183NdX+pJOeT1M+VkwS8Uxewhn0U6AsN1ku87/caimC/kd9UxNFynuq6JXySK+eIdTCuYGa5TXeey97iJhXrO8ckzZvRpMptxeGX5q8m9s/z82Vja3xQTvz+nW76W0+/qoR/ta9/8mtS3PF9w+V1r+NEsfctPVWuf/TjzazKbcfo9C7EHDo8CzaqN/wa7Gnd0uOMXA+K3XA==
+  </data>
+ </layer>
+ <layer name="Weapon" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBADAIAzAswfx7mweeHiQKUgXA1ksHOKPTgYVJBwAAAIDTPpbSAJc=
+  </data>
+ </layer>
+ <layer name="Armor" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzjEBAAAIA6DVsn8xW8xDSEACfDLXAQAAAACAggXI6AA6
   </data>
  </layer>
 </map>
