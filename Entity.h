@@ -24,9 +24,8 @@ public:
 
     float healthPoints, manaPoints;
     int level, experiance;
+    int strength, intelligance;
     float defence, magicResist;
-
-
 };
 
 

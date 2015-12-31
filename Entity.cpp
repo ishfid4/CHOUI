@@ -44,3 +44,67 @@ Entity::Entity(std::string path, sf::Vector2f startingCoordinates) : AnimatedSpr
 }
 
 Entity::~Entity() { }
+//
+//void Entity::setHP(float hp){
+//    healthPoints = hp;
+//}
+//
+//float Entity::getHP() const{
+//    return healthPoints;
+//}
+//
+//void Entity::setMana(float mana){
+//    manaPoints = mana;
+//}
+//
+//float Entity::getMana() const{
+//    return manaPoints;
+//}
+//
+//void Entity::setDefence(float def){
+//    defence = def;
+//}
+//
+//float Entity::getDefence() const{
+//    return defence;
+//}
+//
+//void Entity::setMgResist(float mr){
+//    magicResist = mr;
+//}
+//
+//float Entity::getMgResist() const{
+//    return magicResist;
+//}
+//
+//void Entity::setLevel(int lvl){
+//    level = lvl;
+//}
+//
+//int Entity::getLevel() const{
+//    return level;
+//}
+//
+//void Entity::setExp(int exp){
+//    experiance = exp;
+//}
+//
+//int Entity::getExp() const{
+//    return experiance;
+//}
+//
+//void Entity::setSTR(int str){
+//    strength = str;
+//}
+//
+//int Entity::getSTR() const{
+//    return strength;
+//}
+//
+//void Entity::setINT(int INT){
+//    intelligance = INT;
+//}
+//
+//int Entity::getINT() const{
+//    return intelligance;
+//}

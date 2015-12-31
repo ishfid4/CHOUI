@@ -11,9 +11,9 @@
 class Player : public Entity{
 public:
     Player(std::string path, sf::Vector2f startingCoordinates, sf::Vector2f viewCoordinates);
+    ~Player();
 
     sf::View playerView;
 };
-
 
 #endif //CHOUI_NPC_H

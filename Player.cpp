@@ -8,6 +8,6 @@ Player::Player(std::string path, sf::Vector2f startingCoordinates, sf::Vector2f 
     // creating player Viewport
     playerView.setCenter(sf::Vector2f(startingCoordinates));
     playerView.setSize(viewCoordinates);
-
-
 }
+
+Player::~Player() {}
