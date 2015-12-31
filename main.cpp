@@ -8,6 +8,7 @@
 #include "InputHandler.h"
 #include "Collision.h"
 #include "ItemsFromMap.h"
+#include "Mob.h"
 
 using namespace std;
 
@@ -30,7 +31,10 @@ int main() {
 
     tileMap.GetLayer("Weapon").SetOpacity(100);
 
+    Mob *mob = new Mob("assets/sprites/mobs/smallAnaconda.png", sf::Vector2f(300,300));
+
    // Item *it1 = new Item("assets/sprites/items/sword.png",sf::Vector2f(400,200));
+    NoKeyCommand *noKey = new NoKeyCommand;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -45,15 +49,23 @@ int main() {
         command = obstructCollision.testObstructPlayerCollision(*command);
         command->execute(*player,frameTime);
 
+        mob->play(*mob->currentAnimation);
         //cout<<weaponsMap.size()<<" "<<armorMap.size()<<"\n";ok
         //cout<<weaponsMap[1]->getPhysicalDMG()<<"\n";
         //cout<<armorMap[1]->getPhysicResist()<<"\n";
         //draw
+        sf::VertexArray va0(sf::Quads, 4);
+        va0[0].position = sf::Vector2f(0,0);
+        va0[1].position = sf::Vector2f(0,32);
+        va0[2].position = sf::Vector2f(32,32);
+        va0[3].position = sf::Vector2f(32,0);
+
         window.clear();
         window.setView(player->playerView);
         window.draw(tileMap);
-        window.draw(*weaponsMap[1]);
+        window.draw(*weaponsMap[0]);
         window.draw(*player);
+        window.draw(*mob);
         window.display();
     }
 }
