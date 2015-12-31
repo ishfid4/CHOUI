@@ -7,11 +7,9 @@
 
 
 
-Item::Item(std::string path, sf::Vector2f position) {
-    if (!m_texture.loadFromFile(path)) {
-        std::cout << "Failed to load entity spritesheet!" << std::endl;
-    }
-    setTexture(m_texture);
+Item::Item(sf::Texture* m_texture, sf::Vector2f position) {
+
+    setTexture(*m_texture);
     setPosition(position);
 
     boundingBox = getGlobalBounds();

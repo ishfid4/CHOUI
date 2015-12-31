@@ -9,7 +9,7 @@
 
 class Item : public sf::Sprite{
 public:
-    Item(std::string path,sf::Vector2f position);
+    Item(sf::Texture* m_texture,sf::Vector2f position);
     ~Item();
 
     sf::FloatRect boundingBox;

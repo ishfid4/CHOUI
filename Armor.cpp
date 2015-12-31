@@ -4,7 +4,7 @@
 
 #include "Armor.h"
 
-Armor::Armor(std::string path, sf::Vector2f position) : Item(path, position) { }
+Armor::Armor(sf::Texture* texture, sf::Vector2f position) : Item(texture, position) { }
 
 Armor::~Armor() { }
 
@@ -12,62 +12,62 @@ int Armor::getID() const {
     return ID;
 }
 
-void Armor::setID(int ID) {
-    ID = ID;
+void Armor::setID(int Id) {
+    ID = Id;
 }
 
-int Armor::getArmorType() const {
+std::string Armor::getArmorType() const {
     return armorType;
 }
 
-void Armor::setArmorType(int armorType) {
-   armorType = armorType;
+void Armor::setArmorType(std::string armorTYpe) {
+   armorType = armorTYpe;
 }
 
 int Armor::getMagicResist() const {
     return magicResist;
 }
 
-void Armor::setMagicResist(int magicResist) {
-    magicResist = magicResist;
+void Armor::setMagicResist(int magicREsist) {
+    magicResist = magicREsist;
 }
 
 int Armor::getPhysicResist() const {
     return physicResist;
 }
 
-void Armor::setPhysicResist(int physicResist) {
-    physicResist = physicResist;
+void Armor::setPhysicResist(int physicREsist) {
+    physicResist = physicREsist;
 }
 
 int Armor::getStrReq() const {
     return strReq;
 }
 
-void Armor::setStrReq(int strReq) {
-    strReq = strReq;
+void Armor::setStrReq(int strREq) {
+    strReq = strREq;
 }
 
 int Armor::getIntReq() const {
     return intReq;
 }
 
-void Armor::setIntReq(int intReq) {
-    intReq = intReq;
+void Armor::setIntReq(int intREq) {
+    intReq = intREq;
 }
 
 int Armor::getBonusType() const {
     return bonusType;
 }
 
-void Armor::setBonusType(int bonusType) {
-    bonusType = bonusType;
+void Armor::setBonusType(int bonusTYpe) {
+    bonusType = bonusTYpe;
 }
 
 int Armor::getBonusVal() const {
     return bonusVal;
 }
 
-void Armor::setBonusVal(int bonusVal) {
-    bonusVal = bonusVal;
+void Armor::setBonusVal(int bonusVAl) {
+    bonusVal = bonusVAl;
 }

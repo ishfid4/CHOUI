@@ -10,19 +10,19 @@
 
 class Weapon : public Item{
 public:
-    Weapon(std::string path, sf::Vector2f position);
+    Weapon(sf::Texture* texture, sf::Vector2f position);
     ~Weapon();
 
     int getID() const;
-    void setID(int ID);
+    void setID(int Id);
     int getPhysicalDMG() const;
-    void setPhysicalDMG(int physicalDMG);
+    void setPhysicalDMG(int physicalDmg);
     int getMagicDMG() const;
-    void setMagicDMG(int magicDMG);
+    void setMagicDMG(int magicDmg);
     int getStrReq() const;
-    void setStrReq(int strReq);
+    void setStrReq(int strREq);
     int getIntReq() const;
-    void setIntReq(int intReq);
+    void setIntReq(int intREq);
 
 private:
     int ID;

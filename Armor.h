@@ -10,28 +10,29 @@
 
 class Armor : public Item{
 public:
-    Armor(std::string path, sf::Vector2f position);
+    Armor(sf::Texture* texture, sf::Vector2f position);
     ~Armor();
 
     int getID() const;
-    void setID(int ID);
-    int getArmorType() const;
-    void setArmorType(int armorType);
+    void setID(int Id);
+    std::string getArmorType() const;
+    void setArmorType(std::string armorTYpe);
     int getMagicResist() const;
-    void setMagicResist(int magicResist);
+    void setMagicResist(int magicREsist);
     int getPhysicResist() const;
-    void setPhysicResist(int physicResist);
+    void setPhysicResist(int physicREsist);
     int getStrReq() const;
-    void setStrReq(int strReq);
+    void setStrReq(int strREq);
     int getIntReq() const;
-    void setIntReq(int intReq);
+    void setIntReq(int intREq);
     int getBonusType() const;
-    void setBonusType(int bonusType) ;
+    void setBonusType(int bonusTYpe) ;
     int getBonusVal() const;
-    void setBonusVal(int bonusVal);
+    void setBonusVal(int bonusVAl);
 
 private:
-    int ID, armorType;
+    int ID;
+    std::string armorType;
     int magicResist, physicResist;
     int strReq, intReq;
     int bonusType, bonusVal;

@@ -4,7 +4,7 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(std::string path, sf::Vector2f position) : Item(path,position) { }
+Weapon::Weapon(sf::Texture* texture, sf::Vector2f position) : Item(texture,position) { }
 
 Weapon::~Weapon() { }
 
@@ -12,38 +12,38 @@ int Weapon::getID() const {
     return ID;
 }
 
-void Weapon::setID(int ID) {
-    ID = ID;
+void Weapon::setID(int Id) {
+    ID = Id;
 }
 
 int Weapon::getPhysicalDMG() const {
     return physicalDMG;
 }
 
-void Weapon::setPhysicalDMG(int physicalDMG) {
-    physicalDMG = physicalDMG;
+void Weapon::setPhysicalDMG(int physicalDmg) {
+    physicalDMG = physicalDmg;
 }
 
 int Weapon::getMagicDMG() const {
     return magicDMG;
 }
 
-void Weapon::setMagicDMG(int magicDMG) {
-    magicDMG = magicDMG;
+void Weapon::setMagicDMG(int magicDmg) {
+    magicDMG = magicDmg;
 }
 
 int Weapon::getIntReq() const {
     return intReq;
 }
 
-void Weapon::setIntReq(int intReq) {
-    intReq = intReq;
+void Weapon::setIntReq(int intREq) {
+    intReq = intREq;
 }
 
 int Weapon::getStrReq() const {
     return strReq;
 }
 
-void Weapon::setStrReq(int strReq) {
-    strReq = strReq;
+void Weapon::setStrReq(int strREq) {
+    strReq = strREq;
 }
