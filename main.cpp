@@ -7,7 +7,7 @@
 #include "Player.h"
 #include "InputHandler.h"
 #include "Collision.h"
-#include "Item.h"
+#include "ItemsFromMap.h"
 
 using namespace std;
 
@@ -25,7 +25,12 @@ int main() {
     Player *player = new Player("assets/sprites/PLAYER.png", sf::Vector2f(400, 300), sf::Vector2f(600, 600));
     sf::Clock frameClock; //for animation sync
 
-    Item *it1 = new Item("assets/sprites/items/sword.png",sf::Vector2f(400,200));
+    vector<Weapon*> weaponsMap = loadWeaponsFromMap(tileMap);
+    vector<Armor*> armorMap = loadArmorFromMap(tileMap);
+
+    tileMap.GetLayer("Weapon").SetOpacity(100);
+
+   // Item *it1 = new Item("assets/sprites/items/sword.png",sf::Vector2f(400,200));
 
     while (window.isOpen()) {
         sf::Event event;
@@ -40,11 +45,14 @@ int main() {
         command = obstructCollision.testObstructPlayerCollision(*command);
         command->execute(*player,frameTime);
 
+        //cout<<weaponsMap.size()<<" "<<armorMap.size()<<"\n";ok
+        //cout<<weaponsMap[1]->getPhysicalDMG()<<"\n";
+        //cout<<armorMap[1]->getPhysicResist()<<"\n";
         //draw
         window.clear();
         window.setView(player->playerView);
         window.draw(tileMap);
-        window.draw(*it1);
+        window.draw(*weaponsMap[1]);
         window.draw(*player);
         window.display();
     }

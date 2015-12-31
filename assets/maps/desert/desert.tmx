@@ -277,6 +277,7 @@
   <image source="../../sprites/items/weapons.png" width="96" height="32"/>
   <tile id="0">
    <properties>
+    <property name="ID" value="0"/>
     <property name="intReq" value="4"/>
     <property name="magicDMG" value="9"/>
     <property name="physicalDMG" value="0"/>
@@ -285,6 +286,7 @@
   </tile>
   <tile id="1">
    <properties>
+    <property name="ID" value="1"/>
     <property name="intReq" value="1"/>
     <property name="magicDMG" value="0"/>
     <property name="physicalDMG" value="10"/>
@@ -293,6 +295,7 @@
   </tile>
   <tile id="2">
    <properties>
+    <property name="ID" value="2"/>
     <property name="intReq" value="2"/>
     <property name="magicDMG" value="2"/>
     <property name="physicalDMG" value="9"/>
@@ -304,6 +307,7 @@
   <image source="../../sprites/items/armor.png" width="256" height="32"/>
   <tile id="0">
    <properties>
+    <property name="ID" value="0"/>
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
@@ -313,6 +317,7 @@
   </tile>
   <tile id="1">
    <properties>
+    <property name="ID" value="1"/>
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
@@ -322,6 +327,7 @@
   </tile>
   <tile id="2">
    <properties>
+    <property name="ID" value="2"/>
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
@@ -331,6 +337,7 @@
   </tile>
   <tile id="3">
    <properties>
+    <property name="ID" value="3"/>
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
@@ -340,6 +347,7 @@
   </tile>
   <tile id="4">
    <properties>
+    <property name="ID" value="4"/>
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
@@ -349,6 +357,7 @@
   </tile>
   <tile id="5">
    <properties>
+    <property name="ID" value="5"/>
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
@@ -358,11 +367,22 @@
   </tile>
   <tile id="6">
    <properties>
+    <property name="ID" value="6"/>
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
-    <property name="physicalRes" value="5"/>
-    <property name="strReq" value="2"/>
+    <property name="physicalRes" value="2"/>
+    <property name="strReq" value="1"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="ID" value="7"/>
+    <property name="armorType" value="chest"/>
+    <property name="intReq" value="1"/>
+    <property name="magicRes" value="3"/>
+    <property name="physicalRes" value="2"/>
+    <property name="strReq" value="1"/>
    </properties>
   </tile>
  </tileset>
@@ -381,7 +401,7 @@
  </layer>
  <layer name="Armor" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztzjEBAAAIA6DVsn8xW8xDSEACfDLXAQAAAACAggXI6AA6
+   eJztzkERAAAIAyBbefYvZow9BgmYAZpcOgBAhU0HAAAAqPfsmQBx
   </data>
  </layer>
 </map>
