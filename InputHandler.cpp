@@ -10,6 +10,7 @@ InputHandler::InputHandler() {
     buttonRIGHT_ = new RightCommand;
     buttonLEFT_ = new LeftCommand;
     noButton_ = new NoKeyCommand;
+    buttonA_ = new AttackCommand;
 }
 
 Command* InputHandler::handleInput(Player& player) {
@@ -21,6 +22,8 @@ Command* InputHandler::handleInput(Player& player) {
         return buttonRIGHT_;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         return buttonLEFT_;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        return buttonA_;
 
     return noButton_;
 }

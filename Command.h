@@ -6,6 +6,7 @@
 #define CHOUI_COMMAND_H
 
 #include "Player.h"
+#include "Mob.h"
 
 class Command{
 public:
@@ -69,6 +70,21 @@ public:
         player.play(*player.currentAnimation);
         player.stop();
         player.update(frameTime);
+    }
+};
+
+class AttackCommand : public Command{
+public:
+    virtual void execute(Player& player, sf::Time frameTime,  sf::Vector2f movement = sf::Vector2f(0.f,0.f), Mob& mob){
+        player.play(*player.currentAnimation);
+        player.stop();
+        player.update(frameTime);
+
+        if(mob.healthPoints > 0)
+            mob.healthPoints -= player.strength + player.intelligance;
+
+        if(mob.healthPoints <= 0)
+            mob.~Mob();
     }
 };
 

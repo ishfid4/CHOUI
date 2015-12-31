@@ -49,3 +49,7 @@ Command* Collision::testObstructPlayerCollision(Command& command) {
 
     return &command;
 }
+
+Command* Collision::testCollisonWithMob(Command& command, std::vector<Mob*> mobMap){
+    mobBoundingBox = mobMap[].getGlobalBounds();
+}
