@@ -10,8 +10,14 @@
 
 class Mob : public Entity{
 public:
+    Mob();
     Mob(std::string path, sf::Vector2f spawnCoordinates);
     ~Mob();
+    int getCollidable() const;
+    int setCollidable(int col);
+
+private:
+    int collidable;
 
 };
 

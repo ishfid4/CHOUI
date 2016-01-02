@@ -8,6 +8,11 @@ Player::Player(std::string path, sf::Vector2f startingCoordinates, sf::Vector2f 
     // creating player Viewport
     playerView.setCenter(sf::Vector2f(startingCoordinates));
     playerView.setSize(viewCoordinates);
+    healthPoints = 300;
+    strength = 3;
+    intelligance = 2;
+    magicResist = 0;
+    defence = 0;
 }
 
 Player::~Player() {}

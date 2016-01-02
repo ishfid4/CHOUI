@@ -11,6 +11,7 @@
 
 class Entity : public AnimatedSprite{
 public:
+    Entity();
     Entity(std::string path, sf::Vector2f startingCoordinates);
     ~Entity();
 

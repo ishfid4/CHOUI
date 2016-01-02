@@ -4,6 +4,18 @@
 
 #include "Mob.h"
 
-Mob::Mob(std::string path, sf::Vector2f spawnCoordinates) : Entity(path, spawnCoordinates) { }
+Mob::Mob() { }
+
+Mob::Mob(std::string path, sf::Vector2f spawnCoordinates) : Entity(path, spawnCoordinates) {
+    collidable = 0;
+}
 
 Mob::~Mob() { }
+
+int Mob::getCollidable() const{
+    return collidable;
+}
+
+int Mob::setCollidable(int col){
+    collidable = col;
+}
