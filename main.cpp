@@ -8,6 +8,7 @@
 #include "InputHandler.h"
 #include "Collision.h"
 #include "ItemsFromMap.h"
+#include "MobAI.h"
 
 using namespace std;
 
@@ -37,6 +38,7 @@ int main() {
     mob->play(*mob->currentAnimation);
    // Item *it1 = new Item("assets/sprites/items/sword.png",sf::Vector2f(400,200));
     NoKeyCommand *noKey = new NoKeyCommand;
+    MobAI *mobAI = new MobAI();
 
     while (window.isOpen()) {
         sf::Event event;
@@ -48,9 +50,10 @@ int main() {
         InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
         Command* command = inputHandler.handleInput(*player);
-        command = obstructCollision.testObstructPlayerCollision(*command, mobMap);
-
+        command = obstructCollision.testObstructPlayerCollision(*command);
         command->execute(*player,frameTime, mobMap);
+
+        mobAI->mobsMovement(mobMap, frameTime, tileMap, *player, "Ground", "Collidable");
 
         //draw
         sf::VertexArray va0(sf::Quads, 4);

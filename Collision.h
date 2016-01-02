@@ -12,8 +12,10 @@
 
 class Collision{
 public:
+    Collision(tmx::TileMap& tileMap, Mob& mob, Player& player, std::string layer, std::string propertyName);
     Collision(tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName, std::vector<Mob*> mobMap);
-    Command* testObstructPlayerCollision(Command& command, std::vector<Mob*> mobMap);
+    Command* testObstructPlayerCollision(Command& command);
+    Command* testObstructMobCollision(Command& command);
 
 private:
     NoKeyCommand* noKey;
@@ -22,6 +24,8 @@ private:
     sf::FloatRect playerBoundingBox;
     sf::FloatRect mobBoundingBox;
     sf::Vector2f playerPosition;
+    sf::Vector2f mobPosition;
+
     float x;
     float y;
     int index; // for position in vector<Mob*>
