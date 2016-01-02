@@ -60,6 +60,7 @@ int main() {
         va0[3].position = sf::Vector2f(32,0);
 
         window.clear();
+        player->playerView.setCenter(player->getPosition());
         window.setView(player->playerView);
         window.draw(tileMap);
         window.draw(*weaponsMap[0]);
