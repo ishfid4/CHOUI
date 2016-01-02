@@ -8,7 +8,6 @@
 #include "InputHandler.h"
 #include "Collision.h"
 #include "ItemsFromMap.h"
-#include "Mob.h"
 
 using namespace std;
 
@@ -53,7 +52,6 @@ int main() {
 
         command->execute(*player,frameTime, mobMap);
 
-
         //draw
         sf::VertexArray va0(sf::Quads, 4);
         va0[0].position = sf::Vector2f(0,0);
@@ -65,7 +63,7 @@ int main() {
         window.setView(player->playerView);
         window.draw(tileMap);
         window.draw(*weaponsMap[0]);
-        if(mobMap[0])
+        if(!mobMap.empty())
             window.draw(*mobMap[0]);
         window.draw(*player);
         window.display();

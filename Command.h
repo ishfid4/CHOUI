@@ -14,7 +14,6 @@ public:
     Command();
     virtual ~Command(){};
     virtual void execute(Player& player, sf::Time frameTime, std::vector<Mob*>& mobMap, sf::Vector2f movement = sf::Vector2f(0.f,0.f)) = 0;
-    sf::Vector2f movement;
 };
 
 class UpCommand : public Command{
@@ -81,16 +80,16 @@ public:
         player.stop();
         player.update(frameTime);
 
-        for (int i = 0; i < mobMap.size(); ++i) {
+        for (int i = 0; i < mobMap.size();) {
             if(mobMap[i]->getCollidable() == 1){
-                if(mobMap[i]->healthPoints > 0)
+                if(mobMap[i]->healthPoints > 0){
                     mobMap[i]->healthPoints -= player.strength + player.intelligance;
-                if(mobMap[i]->healthPoints <= 0){
-                    //delete mobMap[i];
-                    std::cout<<mobMap[i]->healthPoints<<"\n";
-                    mobMap.erase(std::remove(mobMap.begin(), mobMap.end(), mobMap[i]), mobMap.end());
+                    i++;
+                }else{
+                    mobMap.erase(mobMap.begin() + i);
                 }
-                std::cout<<mobMap[i]->healthPoints<<"\n";
+            }else{
+                i++;
             }
         }
     }

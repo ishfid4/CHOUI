@@ -18,19 +18,23 @@ Collision::Collision(tmx::TileMap& tileMap, Player& player, std::string layer, s
 
     float dist1 = 0, dist2 = 0;
     int index;
+    if(!mobMap.empty()) {
+        dist1 = sqrt((playerPosition.x - mobMap[0]->getPosition().x) * (playerPosition.x - mobMap[0]->getPosition().x) +
+                     (playerPosition.y - mobMap[0]->getPosition().y) * (playerPosition.y - mobMap[0]->getPosition().y));
 
-    dist1 = sqrt((playerPosition.x - mobMap[0]->getPosition().x)*(playerPosition.x - mobMap[0]->getPosition().x) + (playerPosition.y - mobMap[0]->getPosition().y)*(playerPosition.y - mobMap[0]->getPosition().y));
-
-    for (int i = 1; i < mobMap.size(); ++i) {
-        dist2 = sqrt((playerPosition.x - mobMap[i]->getPosition().x)*(playerPosition.x - mobMap[i]->getPosition().x) + (playerPosition.y - mobMap[i]->getPosition().y)*(playerPosition.y - mobMap[i]->getPosition().y));
-        if((dist2 < dist1) && (dist2 >32)){
-            dist1 = dist2;
-            index = i;
+        for (int i = 1; i < mobMap.size(); ++i) {
+            dist2 = sqrt(
+                    (playerPosition.x - mobMap[i]->getPosition().x) * (playerPosition.x - mobMap[i]->getPosition().x) +
+                    (playerPosition.y - mobMap[i]->getPosition().y) * (playerPosition.y - mobMap[i]->getPosition().y));
+            if ((dist2 < dist1) && (dist2 > 32)) {
+                dist1 = dist2;
+                index = i;
+            }
         }
-    }
 
-    mobBoundingBox = mobMap[index]->getGlobalBounds();
-    mobMap[index]->setCollidable(1);
+        mobBoundingBox = mobMap[index]->getGlobalBounds();
+        mobMap[index]->setCollidable(1);
+    }
 
     tileBoundingBoxLeftTop = tileMap.GetLayer(layer).GetTile(x,y).GetGlobalBounds();
     tileBoundingBoxRightTop = tileMap.GetLayer(layer).GetTile(x+1,y).GetGlobalBounds();
