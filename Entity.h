@@ -23,6 +23,7 @@ public:
     float speed;
     sf::Texture entityTexture;
 
+    double basicAttackSpeed;
     float healthPoints, manaPoints;
     int level, experiance;
     int strength, intelligance;

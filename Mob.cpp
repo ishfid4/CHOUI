@@ -8,6 +8,7 @@ Mob::Mob() { }
 
 Mob::Mob(std::string path, sf::Vector2f spawnCoordinates) : Entity(path, spawnCoordinates) {
     collidable = 0;
+    basicAttackSpeed = 0.5;
 }
 
 Mob::~Mob() { }

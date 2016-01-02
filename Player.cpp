@@ -13,6 +13,7 @@ Player::Player(std::string path, sf::Vector2f startingCoordinates, sf::Vector2f 
     intelligance = 2;
     magicResist = 0;
     defence = 0;
+    basicAttackSpeed = 1;
 }
 
 Player::~Player() {}
