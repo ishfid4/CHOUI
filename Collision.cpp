@@ -5,8 +5,9 @@
 #include <iostream>
 #include "Collision.h"
 
-Collision::Collision(tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName) {
+Collision::Collision(tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName, std::vector<Mob*> mobMap) {
     noKey = new NoKeyCommand;
+    atk = new AttackCommand;
 
     player.play(*player.currentAnimation); //DAFUQ??? otherwise game will crash
     playerBoundingBox = player.getGlobalBounds();
@@ -14,6 +15,22 @@ Collision::Collision(tmx::TileMap& tileMap, Player& player, std::string layer, s
     playerPosition = player.getPosition();
     x = playerPosition.x/32;
     y = playerPosition.y/32;
+
+    float dist1 = 0, dist2 = 0;
+    int index;
+
+    dist1 = sqrt((playerPosition.x - mobMap[0]->getPosition().x)*(playerPosition.x - mobMap[0]->getPosition().x) + (playerPosition.y - mobMap[0]->getPosition().y)*(playerPosition.y - mobMap[0]->getPosition().y));
+
+    for (int i = 1; i < mobMap.size(); ++i) {
+        dist2 = sqrt((playerPosition.x - mobMap[i]->getPosition().x)*(playerPosition.x - mobMap[i]->getPosition().x) + (playerPosition.y - mobMap[i]->getPosition().y)*(playerPosition.y - mobMap[i]->getPosition().y));
+        if((dist2 < dist1) && (dist2 >32)){
+            dist1 = dist2;
+            index = i;
+        }
+    }
+
+    mobBoundingBox = mobMap[index]->getGlobalBounds();
+    mobMap[index]->setCollidable(1);
 
     tileBoundingBoxLeftTop = tileMap.GetLayer(layer).GetTile(x,y).GetGlobalBounds();
     tileBoundingBoxRightTop = tileMap.GetLayer(layer).GetTile(x+1,y).GetGlobalBounds();
@@ -26,30 +43,47 @@ Collision::Collision(tmx::TileMap& tileMap, Player& player, std::string layer, s
     collisionRightBottom = tileMap.GetLayer(layer).GetTile(x+1,y+1).GetPropertyValue(propertyName);
 }
 
-Command* Collision::testObstructPlayerCollision(Command& command) {
+Command* Collision::testObstructPlayerCollision(Command& command, std::vector<Mob*> mobMap) {
     if(typeid(command).name() == typeid(UpCommand).name()){
-        if((collisionLeftTop == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftTop)) || (collisionRightTop == "1" && playerBoundingBox.intersects(tileBoundingBoxRightTop)))
+        if((collisionLeftTop == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftTop)) || (collisionRightTop == "1" && playerBoundingBox.intersects(tileBoundingBoxRightTop)) || playerBoundingBox.intersects(mobBoundingBox) || mobBoundingBox.contains(playerPosition.x,playerPosition.y) || mobBoundingBox.contains(playerPosition.x+32,playerPosition.y))
             return noKey;
     }
 
     if(typeid(command).name() == typeid(DownCommand).name()) {
-        if((collisionLeftBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftBottom)) || (collisionRightBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxRightBottom)))
+        if((collisionLeftBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftBottom)) || (collisionRightBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxRightBottom)) || mobBoundingBox.contains(playerPosition.x,playerPosition.y+32) || mobBoundingBox.contains(playerPosition.x+32,playerPosition.y+32))
             return noKey;
     }
 
     if(typeid(command).name() == typeid(RightCommand).name()) {
-        if((collisionRightTop == "1" && playerBoundingBox.intersects(tileBoundingBoxRightTop)) || (collisionRightBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxRightBottom)))
+        if((collisionRightTop == "1" && playerBoundingBox.intersects(tileBoundingBoxRightTop)) || (collisionRightBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxRightBottom)) || mobBoundingBox.contains(playerPosition.x+32,playerPosition.y) || mobBoundingBox.contains(playerPosition.x+32,playerPosition.y+32))
             return noKey;
     }
 
     if(typeid(command).name() == typeid(LeftCommand).name()) {
-        if((collisionLeftTop == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftTop)) || (collisionLeftBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftBottom)))
+        if((collisionLeftTop == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftTop)) || (collisionLeftBottom == "1" && playerBoundingBox.intersects(tileBoundingBoxLeftBottom)) || mobBoundingBox.contains(playerPosition.x,playerPosition.y+32) || mobBoundingBox.contains(playerPosition.x,playerPosition.y))
             return noKey;
+    }
+
+    if(typeid(command).name() == typeid(AttackCommand).name()){
+        if(playerBoundingBox.intersects(mobBoundingBox)){
+            return atk;
+        }
     }
 
     return &command;
 }
 
 Command* Collision::testCollisonWithMob(Command& command, std::vector<Mob*> mobMap){
-    mobBoundingBox = mobMap[].getGlobalBounds();
+    sf::FloatRect mobBoundingBox;
+
+    if(typeid(command).name() == typeid(AttackCommand).name()){
+        for (int i = 0; i < mobMap.size(); ++i) {
+            mobBoundingBox = mobMap[i]->getGlobalBounds();
+            if(playerBoundingBox.intersects(mobBoundingBox)){
+                mobMap[i]->setCollidable(1);
+                return atk;
+            }
+        }
+    }
+    return &command;
 }

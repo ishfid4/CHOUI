@@ -32,7 +32,10 @@ int main() {
     tileMap.GetLayer("Weapon").SetOpacity(100);
 
     Mob *mob = new Mob("assets/sprites/mobs/smallAnaconda.png", sf::Vector2f(300,300));
-
+    mob->healthPoints = 1000;
+    vector<Mob*> mobMap;
+    mobMap.push_back(mob);
+    mob->play(*mob->currentAnimation);
    // Item *it1 = new Item("assets/sprites/items/sword.png",sf::Vector2f(400,200));
     NoKeyCommand *noKey = new NoKeyCommand;
 
@@ -42,17 +45,15 @@ int main() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        Collision obstructCollision(tileMap, *player, "Ground", "Collidable");
+        Collision obstructCollision(tileMap, *player, "Ground", "Collidable", mobMap);
         InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
         Command* command = inputHandler.handleInput(*player);
-        command = obstructCollision.testObstructPlayerCollision(*command);
-        command->execute(*player,frameTime);
+        command = obstructCollision.testObstructPlayerCollision(*command, mobMap);
 
-        mob->play(*mob->currentAnimation);
-        //cout<<weaponsMap.size()<<" "<<armorMap.size()<<"\n";ok
-        //cout<<weaponsMap[1]->getPhysicalDMG()<<"\n";
-        //cout<<armorMap[1]->getPhysicResist()<<"\n";
+        command->execute(*player,frameTime, mobMap);
+
+
         //draw
         sf::VertexArray va0(sf::Quads, 4);
         va0[0].position = sf::Vector2f(0,0);
@@ -64,8 +65,9 @@ int main() {
         window.setView(player->playerView);
         window.draw(tileMap);
         window.draw(*weaponsMap[0]);
+        if(mobMap[0])
+            window.draw(*mobMap[0]);
         window.draw(*player);
-        window.draw(*mob);
         window.display();
     }
 }

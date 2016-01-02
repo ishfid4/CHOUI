@@ -13,7 +13,6 @@ public:
     InputHandler();
     Command* handleInput(Player& player);
     virtual void execute(Player& player, sf::Time frameTime, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){}
-    //sf::Vector2f movement;
 
 private:
     UpCommand* buttonUP_;
