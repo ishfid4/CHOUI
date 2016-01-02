@@ -17,7 +17,7 @@ Collision::Collision(tmx::TileMap& tileMap, Player& player, std::string layer, s
     y = playerPosition.y/32;
 
     float dist1 = 0, dist2 = 0;
-    int index;
+    int index = 0;
     if(!mobMap.empty()) {
         dist1 = sqrt((playerPosition.x - mobMap[0]->getPosition().x) * (playerPosition.x - mobMap[0]->getPosition().x) +
                      (playerPosition.y - mobMap[0]->getPosition().y) * (playerPosition.y - mobMap[0]->getPosition().y));
@@ -74,20 +74,5 @@ Command* Collision::testObstructPlayerCollision(Command& command, std::vector<Mo
         }
     }
 
-    return &command;
-}
-
-Command* Collision::testCollisonWithMob(Command& command, std::vector<Mob*> mobMap){
-    sf::FloatRect mobBoundingBox;
-
-    if(typeid(command).name() == typeid(AttackCommand).name()){
-        for (int i = 0; i < mobMap.size(); ++i) {
-            mobBoundingBox = mobMap[i]->getGlobalBounds();
-            if(playerBoundingBox.intersects(mobBoundingBox)){
-                mobMap[i]->setCollidable(1);
-                return atk;
-            }
-        }
-    }
     return &command;
 }
