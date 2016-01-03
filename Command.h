@@ -13,12 +13,12 @@ class Command{
 public:
     Command();
     virtual ~Command(){};
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, sf::Vector2f movement = sf::Vector2f(0.f,0.f)) = 0;
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)) = 0;
 };
 
 class UpCommand : public Command{
 public:
-    virtual void execute(Entity&entity, sf::Time frameTime, std::vector<Mob*>& mobMap, sf::Vector2f movement = sf::Vector2f(0.f, 0.f)){
+    virtual void execute(Entity&entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f, 0.f)){
         entity.currentAnimation = &entity.walkingAnimationUp;
         movement.y -= entity.speed;
         entity.play(*entity.currentAnimation);
@@ -29,18 +29,18 @@ public:
 
 class DownCommand : public Command{
 public:
-    virtual void execute(Entity& player, sf::Time frameTime, std::vector<Mob*>& mobMap, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
-        player.currentAnimation = &player.walkingAnimationDown;
-        movement.y += player.speed;
-        player.play(*player.currentAnimation);
-        player.move(movement * frameTime.asSeconds());
-        player.update(frameTime);
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+        entity.currentAnimation = &entity.walkingAnimationDown;
+        movement.y += entity.speed;
+        entity.play(*entity.currentAnimation);
+        entity.move(movement * frameTime.asSeconds());
+        entity.update(frameTime);
     }
 };
 
 class LeftCommand : public Command{
 public:
-    virtual void execute(Entity&entity, sf::Time frameTime, std::vector<Mob*>& mobMap, sf::Vector2f movement = sf::Vector2f(0.f, 0.f)){
+    virtual void execute(Entity&entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f, 0.f)){
         entity.currentAnimation = &entity.walkingAnimationLeft;
         movement.x -= entity.speed;
         entity.play(*entity.currentAnimation);
@@ -51,7 +51,7 @@ public:
 
 class RightCommand : public Command{
 public:
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
         entity.currentAnimation = &entity.walkingAnimationRight;
         movement.x += entity.speed;
         entity.play(*entity.currentAnimation);
@@ -62,16 +62,16 @@ public:
 
 class NoKeyCommand : public Command{
 public:
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
         entity.play(*entity.currentAnimation);
         entity.stop();
         entity.update(frameTime);
     }
 };
 
-class AttackCommand : public Command{
+class PlayerAttackCommand : public Command{
 public:
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
         entity.play(*entity.currentAnimation);
         entity.stop();
         entity.update(frameTime);
@@ -83,6 +83,28 @@ public:
                     i++;
                 }else{
                     mobMap.erase(mobMap.begin() + i);
+                }
+            }else{
+                i++;
+            }
+        }
+    }
+};
+
+class MobAttackCommand : public Command{
+public:
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+        entity.play(*entity.currentAnimation);
+        entity.stop();
+        entity.update(frameTime);
+
+        for (int i = 0; i < mobMap.size();) {
+            if(mobMap[i]->getCollidable() == 1){
+                if(player.healthPoints > 0){
+                    player.healthPoints -= entity.strength + entity.intelligance;
+                    i++;
+                }else{
+                    //death screen?? or what
                 }
             }else{
                 i++;

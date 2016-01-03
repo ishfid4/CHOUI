@@ -32,7 +32,10 @@ int main() {
     tileMap.GetLayer("Weapon").SetOpacity(100);
 
     Mob *mob = new Mob("assets/sprites/mobs/smallAnaconda.png", sf::Vector2f(300,300));
-    mob->healthPoints = 1000;
+    mob->healthPoints = 100;
+    mob->strength = 1;
+    mob->intelligance = 0;
+    mob->speed = 50.f;
     vector<Mob*> mobMap;
     mobMap.push_back(mob);
     mob->play(*mob->currentAnimation);
@@ -51,7 +54,7 @@ int main() {
         sf::Time frameTime = frameClock.restart();
         Command* command = inputHandler.handleInput(*player);
         command = obstructCollision.testObstructPlayerCollision(*command);
-        command->execute(*player,frameTime, mobMap);
+        command->execute(*player,frameTime, mobMap, *player);
 
         mobAI->mobsMovement(mobMap, frameTime, tileMap, *player, "Ground", "Collidable");
 
@@ -63,12 +66,13 @@ int main() {
         va0[3].position = sf::Vector2f(32,0);
 
         window.clear();
-        player->playerView.setCenter(player->getPosition());
-        window.setView(player->playerView);
+
         window.draw(tileMap);
         window.draw(*weaponsMap[0]);
         if(!mobMap.empty())
             window.draw(*mobMap[0]);
+        player->playerView.setCenter(player->getPosition());
+        window.setView(player->playerView);
         window.draw(*player);
         window.display();
     }
