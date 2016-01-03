@@ -56,13 +56,6 @@ int main() {
 
         mobAI->mobsMovement(mobMap, frameTime, tileMap, *player, "Ground", "Collidable");
 
-        //draw
-        sf::VertexArray va0(sf::Quads, 4);
-        va0[0].position = sf::Vector2f(0,0);
-        va0[1].position = sf::Vector2f(0,32);
-        va0[2].position = sf::Vector2f(32,32);
-        va0[3].position = sf::Vector2f(32,0);
-
         renderer->renderWindow(window,tileMap,mobMap,weaponsMap,armorMap,*player);
     }
 }

@@ -20,7 +20,9 @@ public:
 
 private:
     std::vector<sf::Text*> textVector;
-    sf::Font fontBangers;
+
+    sf::Font fontBangers,fontRaleway;
+    sf::RectangleShape rectangleFilter;
 };
 
 
