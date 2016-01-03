@@ -104,7 +104,7 @@ public:
                     player.healthPoints -= entity.strength + entity.intelligance;
                     i++;
                 }else{
-                    //death screen?? or what
+                    player.speed = 0;
                 }
             }else{
                 i++;
