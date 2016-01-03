@@ -10,7 +10,7 @@ InputHandler::InputHandler() {
     buttonRIGHT_ = new RightCommand;
     buttonLEFT_ = new LeftCommand;
     noButton_ = new NoKeyCommand;
-    buttonA_ = new AttackCommand;
+    buttonA_ = new PlayerAttackCommand;
 }
 
 Command* InputHandler::handleInput(Player& player) {

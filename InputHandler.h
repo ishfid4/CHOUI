@@ -20,7 +20,7 @@ private:
     RightCommand* buttonRIGHT_;
     LeftCommand* buttonLEFT_;
     NoKeyCommand* noButton_;
-    AttackCommand* buttonA_;
+    PlayerAttackCommand* buttonA_;
 };
 
 

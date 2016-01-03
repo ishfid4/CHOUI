@@ -19,7 +19,8 @@ public:
 
 private:
     NoKeyCommand* noKey;
-    AttackCommand* atk;
+    PlayerAttackCommand* playerAtk;
+    MobAttackCommand* mobAtk;
 
     sf::FloatRect playerBoundingBox;
     sf::FloatRect mobBoundingBox;
