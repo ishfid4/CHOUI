@@ -22,7 +22,6 @@ private:
     RightCommand* RIGHT_;
     LeftCommand* LEFT_;
     NoKeyCommand* noButton_;
-    AttackCommand* ATK_;
 };
 
 
