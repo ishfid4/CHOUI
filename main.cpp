@@ -9,14 +9,16 @@
 #include "Collision.h"
 #include "ItemsFromMap.h"
 #include "MobAI.h"
+#include "Renderer.h"
 
 using namespace std;
 
 int main() {
-    //Setting window
+    //Setting window and renderer
     sf::Vector2i screenDimensions(800,600);
     sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), "CHOUI");
     window.setFramerateLimit(60);
+    Renderer *renderer = new Renderer();
 
     //setting map
     tmx::TileMap tileMap("assets/maps/desert/desert.tmx");
@@ -43,12 +45,8 @@ int main() {
     NoKeyCommand *noKey = new NoKeyCommand;
     MobAI *mobAI = new MobAI();
 
+
     while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
         Collision obstructCollision(tileMap, *player, "Ground", "Collidable", mobMap);
         InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
@@ -65,16 +63,7 @@ int main() {
         va0[2].position = sf::Vector2f(32,32);
         va0[3].position = sf::Vector2f(32,0);
 
-        window.clear();
-
-        window.draw(tileMap);
-        window.draw(*weaponsMap[0]);
-        if(!mobMap.empty())
-            window.draw(*mobMap[0]);
-        player->playerView.setCenter(player->getPosition());
-        window.setView(player->playerView);
-        window.draw(*player);
-        window.display();
+        renderer->renderWindow(window,tileMap,mobMap,weaponsMap,armorMap,*player);
     }
 }
 
