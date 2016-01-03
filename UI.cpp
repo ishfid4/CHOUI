@@ -30,6 +30,20 @@ void UI::loadHpTiles(std::vector<sf::Texture*>& hpTiles) {
         std::cout<<"Error loading hp tile\n";
 }
 
+void UI::setMobsHpBar(std::vector<Mob*> &mobMap, std::vector<sf::RectangleShape*>& mobHpBar){
+    if(!mobMap.empty()){
+        for (int i = 0; i < mobMap.size(); ++i) {
+            if(mobMap[i]->getCollidable() == 1) {
+                mobHpBar.push_back(new sf::RectangleShape);
+                mobHpBar[mobHpBar.size()-1]->setSize(sf::Vector2f(((mobMap[i]->healthPoints/mobMap[i]->maxHealthPoints)*32),4));
+                mobHpBar[mobHpBar.size()-1]->setFillColor(sf::Color(255,0,0,255));
+                mobHpBar[mobHpBar.size()-1]->setPosition(mobMap[i]->getPosition().x,mobMap[i]->getPosition().y-5);
+            }
+        }
+    }
+
+}
+
 void UI::setPlayerHP(Player& player, std::vector<sf::Texture*>& hpTiles, std::vector<sf::Sprite*>& hpSprites){
     for (int i = player.healthPoints; i > 0; i -= 100) {
         if(i >= 85){

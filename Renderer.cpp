@@ -39,10 +39,12 @@ void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std
     }
     std::vector<sf::Texture*> hpTiles;
     std::vector<sf::Sprite*> hpSprites;
+    std::vector<sf::RectangleShape*> mobHpBar;
 
     UI *ui = new UI();
     ui->loadHpTiles(hpTiles);
     ui->setPlayerHP(player,hpTiles,hpSprites);
+    ui->setMobsHpBar(mobMap,mobHpBar);
 
     window.clear();
     window.draw(tileMap);
@@ -57,6 +59,11 @@ void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std
     for (int i = 0; i < hpSprites.size(); ++i) {
         window.draw(*hpSprites[i]);
     }
+
+    for (int i = 0; i < mobHpBar.size(); ++i) {
+        window.draw(*mobHpBar[i]);
+    }
+
     if(player.healthPoints > 0){
         player.playerView.setCenter(player.getPosition());
         window.setView(player.playerView);

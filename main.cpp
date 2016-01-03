@@ -35,6 +35,7 @@ int main() {
 
     Mob *mob = new Mob("assets/sprites/mobs/smallAnaconda.png", sf::Vector2f(300,300));
     mob->healthPoints = 100;
+    mob->maxHealthPoints = 100;
     mob->strength = 1;
     mob->intelligance = 0;
     mob->speed = 50.f;
