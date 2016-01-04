@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "Collision.h"
+#include "Inventory.h"
 
 Collision::Collision(tmx::TileMap& tileMap, Mob& mob, Player& player, std::string layer, std::string propertyName) {
     noKey = new NoKeyCommand;
@@ -149,4 +150,18 @@ Command* Collision::testObstructMobCollision(Command& command, std::vector<Mob*>
     }
 
     return &command;
+}
+
+void Collision::testItemPlayerCollision(Command& command, Player& player, std::vector<Weapon*> &weaponMap, std::vector<Armor*> &armorMap, tmx::TileMap& tileMap){
+    Inventory *inventory = new Inventory;
+    if(typeid(command).name() == typeid(PickCommand).name()){
+        for (int i = 0; i < weaponMap.size(); ++i) {
+            if(weaponMap[i]->getGlobalBounds().intersects(playerBoundingBox))
+                inventory->addToInv(player, weaponMap, armorMap, i, -1, tileMap);
+        }
+        for (int j = 0; j < armorMap.size(); ++j) {
+            if(armorMap[j]->getGlobalBounds().intersects(playerBoundingBox))
+                inventory->addToInv(player, weaponMap, armorMap, -1, j, tileMap);
+        }
+    }
 }

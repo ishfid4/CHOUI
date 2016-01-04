@@ -9,6 +9,8 @@
 #include <STP/Core/TileMap.hpp>
 #include "Player.h"
 #include "Command.h"
+#include "Weapon.h"
+#include "Armor.h"
 
 class Collision{
 public:
@@ -16,6 +18,7 @@ public:
     Collision(tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName, std::vector<Mob*> mobMap);
     Command* testObstructPlayerCollision(Command& command, std::vector<Mob*> &mobMap);
     Command* testObstructMobCollision(Command& command, std::vector<Mob*> &mobMap);
+    void testItemPlayerCollision(Command& command, Player& player, std::vector<Weapon*> &weaponMap, std::vector<Armor*> &armorMap, tmx::TileMap& tileMap);
 
 private:
     NoKeyCommand* noKey;
