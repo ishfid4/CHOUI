@@ -14,8 +14,8 @@ class Collision{
 public:
     Collision(tmx::TileMap& tileMap, Mob& mob, Player& player, std::string layer, std::string propertyName);
     Collision(tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName, std::vector<Mob*> mobMap);
-    Command* testObstructPlayerCollision(Command& command);
-    Command* testObstructMobCollision(Command& command);
+    Command* testObstructPlayerCollision(Command& command, std::vector<Mob*> &mobMap);
+    Command* testObstructMobCollision(Command& command, std::vector<Mob*> &mobMap);
 
 private:
     NoKeyCommand* noKey;

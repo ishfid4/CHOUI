@@ -56,12 +56,16 @@ void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std
         }
     }
 
-    for (int i = 0; i < hpSprites.size(); ++i) {
-        window.draw(*hpSprites[i]);
+    if(!hpSprites.empty()) {
+        for (int i = 0; i < hpSprites.size(); ++i) {
+            window.draw(*hpSprites[i]);
+        }
     }
 
-    for (int i = 0; i < mobHpBar.size(); ++i) {
-        window.draw(*mobHpBar[i]);
+    if(!mobHpBar.empty()) {
+        for (int i = 0; i < mobHpBar.size(); ++i) {
+            window.draw(*mobHpBar[i]);
+        }
     }
 
     if(player.healthPoints > 0){

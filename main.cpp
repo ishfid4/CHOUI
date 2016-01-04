@@ -46,7 +46,7 @@ int main() {
         InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
         Command* command = inputHandler.handleInput(*player);
-        command = obstructCollision.testObstructPlayerCollision(*command);
+        command = obstructCollision.testObstructPlayerCollision(*command,mobMap);
         command->execute(*player,frameTime, mobMap, *player);
 
         mobAI->mobsMovement(mobMap, frameTime, tileMap, *player, "Ground", "Collidable");

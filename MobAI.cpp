@@ -23,23 +23,23 @@ void MobAI::mobsMovement(std::vector<Mob *> &mobMap, sf::Time frameTime, tmx::Ti
         random = rand()%5;
         switch(random){
             case 0:
-                command = mobCollisions->testObstructMobCollision(*UP_);
+                command = mobCollisions->testObstructMobCollision(*UP_, mobMap);
                 command->execute(*mobMap[i], frameTime, mobMap, player);
                 break;
             case 1:
-                command = mobCollisions->testObstructMobCollision(*DOWN_);
+                command = mobCollisions->testObstructMobCollision(*DOWN_, mobMap);
                 command->execute(*mobMap[i], frameTime, mobMap, player);
                 break;
             case 2:
-                command = mobCollisions->testObstructMobCollision(*RIGHT_);
+                command = mobCollisions->testObstructMobCollision(*RIGHT_, mobMap);
                 command->execute(*mobMap[i], frameTime, mobMap, player);
                 break;
             case 3:
-                command = mobCollisions->testObstructMobCollision(*LEFT_);
+                command = mobCollisions->testObstructMobCollision(*LEFT_, mobMap);
                 command->execute(*mobMap[i], frameTime, mobMap, player);
                 break;
             case 4:
-                command = mobCollisions->testObstructMobCollision(*noButton_);
+                command = mobCollisions->testObstructMobCollision(*noButton_, mobMap);
                 command->execute(*mobMap[i], frameTime, mobMap, player);
                 break;
             default:

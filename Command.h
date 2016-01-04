@@ -80,6 +80,7 @@ public:
             if(mobMap[i]->getCollidable() == 1){
                 if(mobMap[i]->healthPoints > 0){
                     mobMap[i]->healthPoints -= entity.strength + entity.intelligance;
+                    mobMap[i]->setCollidable(0);
                     i++;
                 }else{
                     mobMap.erase(mobMap.begin() + i);
@@ -102,6 +103,7 @@ public:
             if(mobMap[i]->getCollidable() == 1){
                 if(player.healthPoints > 0){
                     player.healthPoints -= entity.strength + entity.intelligance;
+                    mobMap[i]->setCollidable(0);
                     i++;
                 }else{
                     player.speed = 0;
