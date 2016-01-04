@@ -115,4 +115,9 @@ public:
     }
 };
 
+class PickCommand : public Command{
+public:
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){}
+};
+
 #endif //CHOUI_COMMAND_H

@@ -21,6 +21,7 @@ private:
     LeftCommand* buttonLEFT_;
     NoKeyCommand* noButton_;
     PlayerAttackCommand* buttonA_;
+    PickCommand* buttonZ_;
 };
 
 
