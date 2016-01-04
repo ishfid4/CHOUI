@@ -10,6 +10,7 @@
 #include "ItemsFromMap.h"
 #include "MobAI.h"
 #include "Renderer.h"
+#include "Spawner.h"
 
 using namespace std;
 
@@ -33,21 +34,14 @@ int main() {
 
     tileMap.GetLayer("Weapon").SetOpacity(100);
 
-    Mob *mob = new Mob("assets/sprites/mobs/smallAnaconda.png", sf::Vector2f(300,300));
-    mob->healthPoints = 100;
-    mob->maxHealthPoints = 100;
-    mob->strength = 1;
-    mob->intelligance = 0;
-    mob->speed = 50.f;
+    //Setting mob spawners
+    Spawner snakeSpawner(2,300,400,150,1,0,50.f,0);
     vector<Mob*> mobMap;
-    mobMap.push_back(mob);
-    mob->play(*mob->currentAnimation);
-   // Item *it1 = new Item("assets/sprites/items/sword.png",sf::Vector2f(400,200));
-    NoKeyCommand *noKey = new NoKeyCommand;
+
     MobAI *mobAI = new MobAI();
 
-
     while (window.isOpen()) {
+        snakeSpawner.spawnMob(mobMap);
         Collision obstructCollision(tileMap, *player, "Ground", "Collidable", mobMap);
         InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
