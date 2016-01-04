@@ -15,9 +15,11 @@ public:
     ~Mob();
     int getCollidable() const;
     int setCollidable(int col);
+    int getId() const;
+    void setId(int iD);
 
 private:
-    int collidable;
+    int collidable, id;
 
 };
 

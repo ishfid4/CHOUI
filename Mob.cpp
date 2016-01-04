@@ -20,3 +20,11 @@ int Mob::getCollidable() const{
 int Mob::setCollidable(int col){
     collidable = col;
 }
+
+int Mob::getId() const {
+    return id;
+}
+
+void Mob::setId(int iD) {
+    id = iD;
+}
