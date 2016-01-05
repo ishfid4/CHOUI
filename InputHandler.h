@@ -22,6 +22,7 @@ private:
     NoKeyCommand* noButton_;
     PlayerAttackCommand* buttonA_;
     PickCommand* buttonZ_;
+    InventoryCommand* buttonI_;
 };
 
 

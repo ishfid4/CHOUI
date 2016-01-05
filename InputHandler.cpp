@@ -12,6 +12,7 @@ InputHandler::InputHandler() {
     noButton_ = new NoKeyCommand;
     buttonA_ = new PlayerAttackCommand;
     buttonZ_ = new PickCommand;
+    buttonI_ = new InventoryCommand;
 }
 
 Command* InputHandler::handleInput(Player& player) {
@@ -27,6 +28,8 @@ Command* InputHandler::handleInput(Player& player) {
         return buttonA_;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
         return buttonZ_;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::I))
+        return buttonI_;
 
     return noButton_;
 }
