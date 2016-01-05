@@ -280,6 +280,7 @@
     <property name="ID" value="0"/>
     <property name="intReq" value="4"/>
     <property name="magicDMG" value="9"/>
+    <property name="name" value="Piczo Rozpierdalacz"/>
     <property name="physicalDMG" value="0"/>
     <property name="strReq" value="1"/>
    </properties>
@@ -289,6 +290,7 @@
     <property name="ID" value="1"/>
     <property name="intReq" value="1"/>
     <property name="magicDMG" value="0"/>
+    <property name="name" value="Lamacz Chujow"/>
     <property name="physicalDMG" value="10"/>
     <property name="strReq" value="5"/>
    </properties>
@@ -298,6 +300,7 @@
     <property name="ID" value="2"/>
     <property name="intReq" value="2"/>
     <property name="magicDMG" value="2"/>
+    <property name="name" value="Analny Gwalciciel"/>
     <property name="physicalDMG" value="9"/>
     <property name="strReq" value="4"/>
    </properties>
@@ -311,6 +314,7 @@
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
+    <property name="name" value="Ring1"/>
     <property name="physicalRes" value="5"/>
     <property name="strReq" value="2"/>
    </properties>
@@ -321,6 +325,7 @@
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
+    <property name="name" value="Ring2"/>
     <property name="physicalRes" value="5"/>
     <property name="strReq" value="2"/>
    </properties>
@@ -331,6 +336,7 @@
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
+    <property name="name" value="Necles"/>
     <property name="physicalRes" value="5"/>
     <property name="strReq" value="2"/>
    </properties>
@@ -341,6 +347,7 @@
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
+    <property name="name" value="Smigacze"/>
     <property name="physicalRes" value="5"/>
     <property name="strReq" value="2"/>
    </properties>
@@ -351,6 +358,7 @@
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
+    <property name="name" value="Helmet"/>
     <property name="physicalRes" value="5"/>
     <property name="strReq" value="2"/>
    </properties>
@@ -361,6 +369,7 @@
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
+    <property name="name" value="Klata"/>
     <property name="physicalRes" value="5"/>
     <property name="strReq" value="2"/>
    </properties>
@@ -371,6 +380,7 @@
     <property name="armorType" value="chest"/>
     <property name="intReq" value="1"/>
     <property name="magicRes" value="3"/>
+    <property name="name" value="Legi"/>
     <property name="physicalRes" value="2"/>
     <property name="strReq" value="1"/>
    </properties>

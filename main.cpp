@@ -55,7 +55,7 @@ int main() {
 
         mobAI->mobsMovement(mobMap, frameTime, tileMap, *player, "Ground", "Collidable");
 
-        renderer->renderWindow(window,tileMap,mobMap,weaponsMap,armorMap,*player);
+        renderer->renderWindow(window,tileMap,mobMap,weaponsMap,armorMap,*player,*command);
     }
 }
 

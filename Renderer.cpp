@@ -27,11 +27,45 @@ Renderer::Renderer(){
     //DeadRedFilter
     rectangleFilter = sf::RectangleShape(sf::Vector2f(1920,1080));
     rectangleFilter.setFillColor(sf::Color(225,0,120,95));
+
+    openedInv = false;
+    secondPress = false;
+    invBackGround = sf::RectangleShape(sf::Vector2f(150,300));
+    invBackGround.setFillColor(sf::Color(0,205,255,165));
+    invBackGround.setOutlineColor(sf::Color(0,137,255,165));
+    invBackGround.setOutlineThickness(2);
 }
 
 Renderer::~Renderer(){}
 
-void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std::vector<Mob*>& mobMap, std::vector<Weapon*>& weaponsMap, std::vector<Armor*>& armorMap, Player& player){
+void Renderer::showInventory(Command& command, Player &player, sf::RenderWindow& window) {
+    if(typeid(command).name() == typeid(InventoryCommand).name()){
+        if(secondPress){
+            openedInv = false;
+            secondPress = false;
+            for (int i = 0; i < player.inventory.size(); ++i) {
+                textVector.erase(textVector.begin()-1);
+            }
+        }else if(!secondPress){
+            if(!openedInv) {
+                invBackGround.setPosition(player.getPosition().x - 200, player.getPosition().y - 200);
+                window.draw(invBackGround);
+                for (int i = 0; i < player.inventory.size(); ++i) {
+                    textVector.push_back(new sf::Text);
+                    textVector[textVector.size() - 1]->setFont(fontBangers);
+                    textVector[textVector.size() - 1]->setString(player.inventory[i]->getName());
+                    textVector[textVector.size() - 1]->setCharacterSize(16);
+                    textVector[textVector.size() - 1]->setPosition(player.getPosition().x - 197,
+                                                                   player.getPosition().y - 200 + (i * 18));
+                }
+                openedInv = true;
+                secondPress = true;
+            }
+        }
+    }
+}
+
+void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std::vector<Mob*>& mobMap, std::vector<Weapon*>& weaponsMap, std::vector<Armor*>& armorMap, Player& player, Command& command){
     sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed)
@@ -66,6 +100,12 @@ void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std
         for (int i = 0; i < mobHpBar.size(); ++i) {
             window.draw(*mobHpBar[i]);
         }
+    }
+
+    showInventory(command,player,window);
+
+    for (int j = 2; j < textVector.size(); ++j) {
+        window.draw(*textVector[j]);
     }
 
     if(player.healthPoints > 0){
