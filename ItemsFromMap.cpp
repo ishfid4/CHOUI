@@ -16,6 +16,7 @@ std::vector<Weapon*> loadWeaponsFromMap(tmx::TileMap& tileMap){
                 unsigned long vectorLength = weaponsOnMap.size();
 
                 weaponsOnMap[vectorLength-1]->setID(ID);
+                weaponsOnMap[vectorLength-1]->setName(tileMap.GetLayer("Weapon").GetTile(i,j).GetPropertyValue("name"));
                 weaponsOnMap[vectorLength-1]->setIntReq(std::stoi(tileMap.GetLayer("Weapon").GetTile(i,j).GetPropertyValue("intReq")));
                 weaponsOnMap[vectorLength-1]->setStrReq(std::stoi(tileMap.GetLayer("Weapon").GetTile(i,j).GetPropertyValue("strReq")));
                 weaponsOnMap[vectorLength-1]->setPhysicalDMG(std::stoi(tileMap.GetLayer("Weapon").GetTile(i,j).GetPropertyValue("physicalDMG")));
@@ -37,6 +38,7 @@ std::vector<Armor*> loadArmorFromMap(tmx::TileMap& tileMap){
                 unsigned long vectorLength = armorOnMap.size();
 
                 armorOnMap[vectorLength-1]->setID(ID);
+                armorOnMap[vectorLength-1]->setName(tileMap.GetLayer("Armor").GetTile(i,j).GetPropertyValue("name"));
                 armorOnMap[vectorLength-1]->setArmorType(tileMap.GetLayer("Armor").GetTile(i,j).GetPropertyValue("armorType"));
                 armorOnMap[vectorLength-1]->setIntReq(std::stoi(tileMap.GetLayer("Armor").GetTile(i,j).GetPropertyValue("intReq")));
                 armorOnMap[vectorLength-1]->setStrReq(std::stoi(tileMap.GetLayer("Armor").GetTile(i,j).GetPropertyValue("strReq")));

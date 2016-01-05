@@ -16,3 +16,10 @@ Item::Item(sf::Texture* m_texture, sf::Vector2f position) {
 }
 
 Item::~Item() { }
+
+std::string  Item::getName() const{
+    return name;
+}
+void  Item::setName(std::string nam){
+    name = nam;
+}

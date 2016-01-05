@@ -12,10 +12,13 @@ public:
     Item(sf::Texture* m_texture,sf::Vector2f position);
     ~Item();
 
+    std::string getName() const;
+    void setName(std::string nam);
+
     sf::FloatRect boundingBox;
 
 private:
-
+    std::string name;
     sf::VertexArray m_vertices;
     sf::Texture m_texture;
 };
