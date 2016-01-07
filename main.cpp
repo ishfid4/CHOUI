@@ -17,7 +17,7 @@ using namespace std;
 int main() {
     //Setting window and renderer
     sf::Vector2i screenDimensions(800,600);
-    sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), "CHOUI");
+    sf::RenderWindow window(sf::VideoMode((u_int)screenDimensions.x, (u_int)screenDimensions.y), "CHOUI");
     window.setFramerateLimit(60);
     Renderer renderer;
 

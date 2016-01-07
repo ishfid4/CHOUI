@@ -5,20 +5,20 @@
 #include "MobAI.h"
 #include "Collision.h"
 
-MobAI::MobAI() {
-    UP_ = new UpCommand;
-    DOWN_ = new DownCommand;
-    RIGHT_ = new RightCommand;
-    LEFT_ = new LeftCommand;
-    noButton_ = new NoKeyCommand;
-}
+MobAI::MobAI() :
+        UP_(new UpCommand),
+        DOWN_(new DownCommand),
+        RIGHT_(new RightCommand),
+        LEFT_(new LeftCommand),
+        noButton_(new NoKeyCommand)
+{ }
 
 void MobAI::mobsMovement(std::vector<std::unique_ptr<Mob>> &mobMap, sf::Time frameTime, tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName) {
-    srand(time(NULL));
+    srand((u_int)time(NULL));
     int random;
     Collision *mobCollisions;
     Command* command;
-    for (int i = 0; i < mobMap.size(); ++i) {
+    for (u_int i = 0; i < mobMap.size(); ++i) {
         mobCollisions = new Collision(tileMap, *mobMap[i], player, layer, propertyName);
         random = rand()%5;
         switch(random){

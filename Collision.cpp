@@ -14,8 +14,8 @@ Collision::Collision(tmx::TileMap& tileMap, Mob& mob, Player& player, std::strin
     mobBoundingBox = mob.getGlobalBounds();
 
     mobPosition = mob.getPosition();
-    x = mobPosition.x/32;
-    y = mobPosition.y/32;
+    x = (u_int)mobPosition.x/32;
+    y = (u_int)mobPosition.y/32;
 
     tileBoundingBoxLeftTop = tileMap.GetLayer(layer).GetTile(x,y).GetGlobalBounds();
     tileBoundingBoxRightTop = tileMap.GetLayer(layer).GetTile(x+1,y).GetGlobalBounds();
@@ -37,16 +37,16 @@ Collision::Collision(tmx::TileMap &tileMap, Player &player, std::string layer, s
     playerBoundingBox = player.getGlobalBounds();
 
     playerPosition = player.getPosition();
-    x = playerPosition.x/32;
-    y = playerPosition.y/32;
+    x = (u_int)playerPosition.x/32;
+    y = (u_int)playerPosition.y/32;
 
-    float dist1 = 0, dist2 = 0;
+    double dist1 = 0, dist2 = 0;
     int index = 0;
     if(!mobMap.empty()) {
         dist1 = sqrt((playerPosition.x - mobMap[0]->getPosition().x) * (playerPosition.x - mobMap[0]->getPosition().x) +
                      (playerPosition.y - mobMap[0]->getPosition().y) * (playerPosition.y - mobMap[0]->getPosition().y));
 
-        for (int i = 1; i < mobMap.size(); ++i) {
+        for (u_int i = 1; i < mobMap.size(); ++i) {
             dist2 = sqrt(
                     (playerPosition.x - mobMap[i]->getPosition().x) * (playerPosition.x - mobMap[i]->getPosition().x) +
                     (playerPosition.y - mobMap[i]->getPosition().y) * (playerPosition.y - mobMap[i]->getPosition().y));
@@ -72,7 +72,7 @@ Collision::Collision(tmx::TileMap &tileMap, Player &player, std::string layer, s
 }
 
 Command* Collision::testObstructPlayerCollision(Command& command, std::vector<std::unique_ptr<Mob>>& mobMap) {
-    for (int i = 0; i < mobMap.size(); ++i) {
+    for (u_int i = 0; i < mobMap.size(); ++i) {
         if(mobMap[i]->getPosition() == mobPosition)
             index = i;
     }
@@ -108,7 +108,7 @@ Command* Collision::testObstructPlayerCollision(Command& command, std::vector<st
 }
 
 Command* Collision::testObstructMobCollision(Command& command, std::vector<std::unique_ptr<Mob>>& mobMap) {
-    for (int i = 0; i < mobMap.size(); ++i) {
+    for (u_int i = 0; i < mobMap.size(); ++i) {
         if(mobMap[i]->getPosition() == mobPosition)
             index = i;
     }
@@ -155,11 +155,11 @@ Command* Collision::testObstructMobCollision(Command& command, std::vector<std::
 void Collision::testItemPlayerCollision(Command& command, Player& player, std::vector<std::unique_ptr<Weapon>> &weaponMap, std::vector<std::unique_ptr<Armor>> &armorMap, tmx::TileMap& tileMap){
     Inventory *inventory = new Inventory;
     if(typeid(command).name() == typeid(PickCommand).name()){
-        for (int i = 0; i < weaponMap.size(); ++i) {
+        for (u_int i = 0; i < weaponMap.size(); ++i) {
             if(weaponMap[i]->getGlobalBounds().intersects(playerBoundingBox))
                 inventory->addToInv(player, weaponMap, armorMap, i, -1, tileMap);
         }
-        for (int j = 0; j < armorMap.size(); ++j) {
+        for (u_int j = 0; j < armorMap.size(); ++j) {
             if(armorMap[j]->getGlobalBounds().intersects(playerBoundingBox))
                 inventory->addToInv(player, weaponMap, armorMap, -1, j, tileMap);
         }

@@ -8,11 +8,11 @@
 std::vector<std::unique_ptr<Weapon>> loadWeaponsFromMap(tmx::TileMap& tileMap){
     std::vector <std::unique_ptr<Weapon>> weaponsOnMap;
 
-    for (int i = 1; i < tileMap.GetWidth(); i++) {
-        for (int j = 1; j < tileMap.GetHeight(); j++) {
+    for (u_int i = 1; i < tileMap.GetWidth(); i++) {
+        for (u_int j = 1; j < tileMap.GetHeight(); j++) {
             if(!tileMap.GetLayer("Weapon").GetTile(i,j).empty()){
                 int ID = std::stoi(tileMap.GetLayer("Weapon").GetTile(i,j).GetPropertyValue("ID"));
-                weaponsOnMap.emplace_back(new Weapon(const_cast<sf::Texture*>(tileMap.GetTileSet("Weapons").GetTile(ID).GetTexture()),sf::Vector2f(i*32,j*32)));
+                weaponsOnMap.emplace_back(new Weapon(const_cast<sf::Texture*>(tileMap.GetTileSet("Weapons").GetTile((u_int)ID).GetTexture()),sf::Vector2f(i*32,j*32)));
                 unsigned long vectorLength = weaponsOnMap.size();
 
                 weaponsOnMap[vectorLength-1]->setID(ID);
@@ -30,11 +30,11 @@ std::vector<std::unique_ptr<Weapon>> loadWeaponsFromMap(tmx::TileMap& tileMap){
 std::vector<std::unique_ptr<Armor>> loadArmorFromMap(tmx::TileMap& tileMap){
     std::vector <std::unique_ptr<Armor>> armorOnMap;
 
-    for (int i = 0; i < tileMap.GetWidth() ; ++i) {
-        for (int j = 0; j < tileMap.GetHeight(); ++j) {
+    for (u_int i = 0; i < tileMap.GetWidth() ; ++i) {
+        for (u_int j = 0; j < tileMap.GetHeight(); ++j) {
             if(!tileMap.GetLayer("Armor").GetTile(i,j).empty()){
                 int ID = std::stoi(tileMap.GetLayer("Armor").GetTile(i,j).GetPropertyValue("ID"));
-                armorOnMap.emplace_back(new Armor(const_cast<sf::Texture*>(tileMap.GetTileSet("Armor").GetTile(ID).GetTexture()),sf::Vector2f(i*32,j*32)));
+                armorOnMap.emplace_back(new Armor(const_cast<sf::Texture*>(tileMap.GetTileSet("Armor").GetTile((u_int)ID).GetTexture()),sf::Vector2f(i*32,j*32)));
                 unsigned long vectorLength = armorOnMap.size();
 
                 armorOnMap[vectorLength-1]->setID(ID);

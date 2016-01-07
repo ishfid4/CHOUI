@@ -17,11 +17,11 @@ public:
     void mobsMovement(std::vector<std::unique_ptr<Mob>>& mobMap, sf::Time frameTime, tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName);
 
 private:
-    UpCommand* UP_;
-    DownCommand* DOWN_;
-    RightCommand* RIGHT_;
-    LeftCommand* LEFT_;
-    NoKeyCommand* noButton_;
+    std::unique_ptr<UpCommand> UP_;
+    std::unique_ptr<DownCommand> DOWN_;
+    std::unique_ptr<RightCommand> RIGHT_;
+    std::unique_ptr<LeftCommand> LEFT_;
+    std::unique_ptr<NoKeyCommand> noButton_;
 };
 
 

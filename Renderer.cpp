@@ -45,7 +45,7 @@ void Renderer::showInventory(Command& command, Player &player, sf::RenderWindow&
         if(secondPress){
             openedInv = false;
             secondPress = false;
-            for (int i = 0; i < player.inventory.size(); ++i) {
+            for (u_int i = 0; i < player.inventory.size(); ++i) {
                 textVector.erase(textVector.begin()-1);
             }
         }else if(!secondPress){
@@ -53,7 +53,7 @@ void Renderer::showInventory(Command& command, Player &player, sf::RenderWindow&
                 invBackGround.setPosition(player.getPosition().x - 200, player.getPosition().y - 200);
                 if(player.inventory.size()>0){
                     window.draw(invBackGround);
-                    for (int i = 0; i < player.inventory.size(); ++i) {
+                    for (u_int i = 0; i < player.inventory.size(); ++i) {
                         std::unique_ptr<sf::Text> itemTxt(new sf::Text);
                         itemTxt->setFont(fontBangers);
                         itemTxt->setString(player.inventory[i]->getName());
@@ -88,26 +88,26 @@ void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std
     window.draw(*weaponsMap[0]);
 
     if(!mobMap.empty()){
-        for (int i = 0; i < mobMap.size(); i++) {
+        for (u_int i = 0; i < mobMap.size(); i++) {
             window.draw(*mobMap[i]);
         }
     }
 
     if(!hpSprites.empty()) {
-        for (int i = 0; i < hpSprites.size(); ++i) {
+        for (u_int i = 0; i < hpSprites.size(); ++i) {
             window.draw(*hpSprites[i]);
         }
     }
 
     if(!mobHpBar.empty()) {
-        for (int i = 0; i < mobHpBar.size(); ++i) {
+        for (u_int i = 0; i < mobHpBar.size(); ++i) {
             window.draw(*mobHpBar[i]);
         }
     }
 
     showInventory(command,player,window);
 
-    for (int j = 2; j < textVector.size(); ++j) {
+    for (u_int j = 2; j < textVector.size(); ++j) {
         window.draw(*textVector[j]);
     }
 

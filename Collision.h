@@ -32,8 +32,7 @@ private:
     sf::Vector2f playerPosition;
     sf::Vector2f mobPosition;
 
-    float x;
-    float y;
+    u_int x, y;
     int index; // for position in vector<Mob*>
 
     sf::FloatRect tileBoundingBoxLeftTop;

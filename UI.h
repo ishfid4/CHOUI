@@ -18,6 +18,9 @@ public:
     void loadHpTiles(std::vector<std::unique_ptr<sf::Texture>>& hpTiles);
     void setPlayerHP(Player& player, std::vector<std::unique_ptr<sf::Texture>>& hpTiles, std::vector<std::unique_ptr<sf::Sprite>>& hpSprites);
     void setMobsHpBar(std::vector<std::unique_ptr<Mob>> &mobMap, std::vector<sf::RectangleShape*>& mobHpBar);
+
+private:
+    int textureId;
 };
 
 

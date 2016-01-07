@@ -77,7 +77,7 @@ public:
         entity.stop();
         entity.update(frameTime);
 
-        for (int i = 0; i < mobMap.size();) {
+        for (u_int i = 0; i < mobMap.size();) {
             if(mobMap[i]->getCollidable() == 1){
                 if(mobMap[i]->healthPoints > 0){
                     mobMap[i]->healthPoints -= entity.strength + entity.intelligance;
@@ -100,7 +100,7 @@ public:
         entity.stop();
         entity.update(frameTime);
 
-        for (int i = 0; i < mobMap.size();) {
+        for (u_int i = 0; i < mobMap.size();) {
             if(mobMap[i]->getCollidable() == 1){
                 if(player.healthPoints > 0){
                     player.healthPoints -= entity.strength + entity.intelligance;
