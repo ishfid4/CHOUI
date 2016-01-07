@@ -13,7 +13,7 @@ MobAI::MobAI() {
     noButton_ = new NoKeyCommand;
 }
 
-void MobAI::mobsMovement(std::vector<Mob *> &mobMap, sf::Time frameTime, tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName) {
+void MobAI::mobsMovement(std::vector<std::unique_ptr<Mob>> &mobMap, sf::Time frameTime, tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName) {
     srand(time(NULL));
     int random;
     Collision *mobCollisions;

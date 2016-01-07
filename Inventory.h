@@ -15,7 +15,7 @@ class Inventory {
 public:
     Inventory();
     ~Inventory();
-    void addToInv(Player& player, std::vector<Weapon*> &weaponMap, std::vector<Armor*> &armorMap, int weaponID, int armorID, tmx::TileMap& tileMap);
+    void addToInv(Player& player, std::vector<std::unique_ptr<Weapon>> &weaponMap, std::vector<std::unique_ptr<Armor>> &armorMap, int weaponID, int armorID, tmx::TileMap& tileMap);
 };
 
 

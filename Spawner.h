@@ -7,12 +7,13 @@
 
 
 #include "Mob.h"
+#include <memory>
 
 class Spawner {
 public:
     Spawner(int maxMobs, int xPos, int yPos, int hp, int str, int intel, float speedMob, int id);
     ~Spawner();
-    void spawnMob(std::vector<Mob*>& mobMap);
+    void spawnMob(std::vector<std::unique_ptr<Mob>>& mobMap);
 
 private:
     int maxMobSpawned, mobid;

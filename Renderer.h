@@ -12,16 +12,19 @@
 #include "Armor.h"
 #include "Player.h"
 #include "Command.h"
+#include "UI.h"
 
 class Renderer{
 public:
     Renderer();
     ~Renderer();
-    void renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std::vector<Mob*>& mobMap, std::vector<Weapon*>& weaponsMap, std::vector<Armor*>& armorMap, Player& player, Command& command);
+    void renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std::vector<std::unique_ptr<Mob>>& mobMap, std::vector<std::unique_ptr<Weapon>>& weaponsMap, std::vector<std::unique_ptr<Armor>>& armorMap, Player& player, Command& command);
     void showInventory(Command& command, Player &player, sf::RenderWindow& window);
 
 private:
-    std::vector<sf::Text*> textVector;
+    UI ui;
+
+    std::vector<std::unique_ptr<sf::Text>> textVector;
 
     sf::Font fontBangers,fontRaleway;
     sf::RectangleShape rectangleFilter;

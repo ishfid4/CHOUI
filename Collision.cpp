@@ -28,7 +28,8 @@ Collision::Collision(tmx::TileMap& tileMap, Mob& mob, Player& player, std::strin
     collisionRightBottom = tileMap.GetLayer(layer).GetTile(x+1,y+1).GetPropertyValue(propertyName);
 }
 
-Collision::Collision(tmx::TileMap& tileMap, Player& player, std::string layer, std::string propertyName, std::vector<Mob*> mobMap) {
+Collision::Collision(tmx::TileMap &tileMap, Player &player, std::string layer, std::string propertyName,
+                     std::vector<std::unique_ptr<Mob>> &mobMap) {
     noKey = new NoKeyCommand;
     playerAtk = new PlayerAttackCommand;
 
@@ -57,7 +58,6 @@ Collision::Collision(tmx::TileMap& tileMap, Player& player, std::string layer, s
 
         mobBoundingBox = mobMap[index]->getGlobalBounds();
         mobPosition = mobMap[index]->getPosition();
-        //mobMap[index]->setCollidable(0);
     }
 
     tileBoundingBoxLeftTop = tileMap.GetLayer(layer).GetTile(x,y).GetGlobalBounds();
@@ -71,7 +71,7 @@ Collision::Collision(tmx::TileMap& tileMap, Player& player, std::string layer, s
     collisionRightBottom = tileMap.GetLayer(layer).GetTile(x+1,y+1).GetPropertyValue(propertyName);
 }
 
-Command* Collision::testObstructPlayerCollision(Command& command, std::vector<Mob*>& mobMap) {
+Command* Collision::testObstructPlayerCollision(Command& command, std::vector<std::unique_ptr<Mob>>& mobMap) {
     for (int i = 0; i < mobMap.size(); ++i) {
         if(mobMap[i]->getPosition() == mobPosition)
             index = i;
@@ -107,7 +107,7 @@ Command* Collision::testObstructPlayerCollision(Command& command, std::vector<Mo
     return &command;
 }
 
-Command* Collision::testObstructMobCollision(Command& command, std::vector<Mob*>& mobMap) {
+Command* Collision::testObstructMobCollision(Command& command, std::vector<std::unique_ptr<Mob>>& mobMap) {
     for (int i = 0; i < mobMap.size(); ++i) {
         if(mobMap[i]->getPosition() == mobPosition)
             index = i;
@@ -152,7 +152,7 @@ Command* Collision::testObstructMobCollision(Command& command, std::vector<Mob*>
     return &command;
 }
 
-void Collision::testItemPlayerCollision(Command& command, Player& player, std::vector<Weapon*> &weaponMap, std::vector<Armor*> &armorMap, tmx::TileMap& tileMap){
+void Collision::testItemPlayerCollision(Command& command, Player& player, std::vector<std::unique_ptr<Weapon>> &weaponMap, std::vector<std::unique_ptr<Armor>> &armorMap, tmx::TileMap& tileMap){
     Inventory *inventory = new Inventory;
     if(typeid(command).name() == typeid(PickCommand).name()){
         for (int i = 0; i < weaponMap.size(); ++i) {

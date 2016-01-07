@@ -5,7 +5,7 @@
 #include <STP/Core/TileMap.hpp>
 #include <iostream>
 #include "Renderer.h"
-#include "UI.h"
+
 
 
 Renderer::Renderer(){
@@ -15,14 +15,16 @@ Renderer::Renderer(){
         std::cout<<"Error loading Bangers.ttf\n";
 
     //DeadText
-    textVector.push_back(new sf::Text);
-    textVector[0]->setFont(fontBangers);
-    textVector[0]->setString("Game Over");
-    textVector[0]->setCharacterSize(42);
-    textVector.push_back(new sf::Text);
-    textVector[1]->setFont(fontRaleway);
-    textVector[1]->setString("Press ESC to exit");
-    textVector[1]->setCharacterSize(12);
+    std::unique_ptr<sf::Text> txt1(new sf::Text);
+    txt1->setFont(fontBangers);
+    txt1->setString("Game Over");
+    txt1->setCharacterSize(42);
+    textVector.push_back(std::move(txt1));
+    std::unique_ptr<sf::Text> txt(new sf::Text);
+    txt->setFont(fontRaleway);
+    txt->setString("Press ESC to exit");
+    txt->setCharacterSize(12);
+    textVector.push_back(std::move(txt));
 
     //DeadRedFilter
     rectangleFilter = sf::RectangleShape(sf::Vector2f(1920,1080));
@@ -49,36 +51,37 @@ void Renderer::showInventory(Command& command, Player &player, sf::RenderWindow&
         }else if(!secondPress){
             if(!openedInv) {
                 invBackGround.setPosition(player.getPosition().x - 200, player.getPosition().y - 200);
-                window.draw(invBackGround);
-                for (int i = 0; i < player.inventory.size(); ++i) {
-                    textVector.push_back(new sf::Text);
-                    textVector[textVector.size() - 1]->setFont(fontBangers);
-                    textVector[textVector.size() - 1]->setString(player.inventory[i]->getName());
-                    textVector[textVector.size() - 1]->setCharacterSize(16);
-                    textVector[textVector.size() - 1]->setPosition(player.getPosition().x - 197,
-                                                                   player.getPosition().y - 200 + (i * 18));
+                if(player.inventory.size()>0){
+                    window.draw(invBackGround);
+                    for (int i = 0; i < player.inventory.size(); ++i) {
+                        std::unique_ptr<sf::Text> itemTxt(new sf::Text);
+                        itemTxt->setFont(fontBangers);
+                        itemTxt->setString(player.inventory[i]->getName());
+                        itemTxt->setCharacterSize(16);
+                        itemTxt->setPosition(player.getPosition().x - 197, player.getPosition().y - 200 + (i * 18));
+                        textVector.push_back(std::move(itemTxt));
+                    }
+                    openedInv = true;
+                    secondPress = true;
                 }
-                openedInv = true;
-                secondPress = true;
             }
         }
     }
 }
 
-void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std::vector<Mob*>& mobMap, std::vector<Weapon*>& weaponsMap, std::vector<Armor*>& armorMap, Player& player, Command& command){
+void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std::vector<std::unique_ptr<Mob>>& mobMap, std::vector<std::unique_ptr<Weapon>>& weaponsMap, std::vector<std::unique_ptr<Armor>>& armorMap, Player& player, Command& command){
     sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed)
             window.close();
     }
-    std::vector<sf::Texture*> hpTiles;
-    std::vector<sf::Sprite*> hpSprites;
+    std::vector<std::unique_ptr<sf::Texture>> hpTiles;
+    std::vector<std::unique_ptr<sf::Sprite>> hpSprites;
     std::vector<sf::RectangleShape*> mobHpBar;
 
-    UI *ui = new UI();
-    ui->loadHpTiles(hpTiles);
-    ui->setPlayerHP(player,hpTiles,hpSprites);
-    ui->setMobsHpBar(mobMap,mobHpBar);
+    ui.loadHpTiles(hpTiles);
+    ui.setPlayerHP(player,hpTiles,hpSprites);
+    ui.setMobsHpBar(mobMap,mobHpBar);
 
     window.clear();
     window.draw(tileMap);

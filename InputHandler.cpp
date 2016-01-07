@@ -4,32 +4,32 @@
 
 #include "InputHandler.h"
 
-InputHandler::InputHandler() {
-    buttonUP_ = new UpCommand;
-    buttonDOWN_ = new DownCommand;
-    buttonRIGHT_ = new RightCommand;
-    buttonLEFT_ = new LeftCommand;
-    noButton_ = new NoKeyCommand;
-    buttonA_ = new PlayerAttackCommand;
-    buttonZ_ = new PickCommand;
-    buttonI_ = new InventoryCommand;
-}
+InputHandler::InputHandler() :
+        buttonUP_(new UpCommand),
+        buttonDOWN_(new DownCommand),
+        buttonRIGHT_(new RightCommand),
+        buttonLEFT_(new LeftCommand),
+        noButton_(new NoKeyCommand),
+        buttonA_(new PlayerAttackCommand),
+        buttonZ_(new PickCommand),
+        buttonI_(new InventoryCommand)
+{ }
 
 Command* InputHandler::handleInput(Player& player) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        return buttonUP_;
+        return buttonUP_.get();
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        return buttonDOWN_;
+        return buttonDOWN_.get();
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        return buttonRIGHT_;
+        return buttonRIGHT_.get();
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        return buttonLEFT_;
+        return buttonLEFT_.get();
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        return buttonA_;
+        return buttonA_.get();
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-        return buttonZ_;
+        return buttonZ_.get();
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::I))
-        return buttonI_;
+        return buttonI_.get();
 
-    return noButton_;
+    return noButton_.get();
 }

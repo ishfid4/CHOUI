@@ -9,7 +9,7 @@
 #include "Weapon.h"
 #include "Armor.h"
 
-std::vector<Weapon*> loadWeaponsFromMap(tmx::TileMap& tileMap);
-std::vector<Armor*> loadArmorFromMap(tmx::TileMap& tileMap);
+std::vector<std::unique_ptr<Weapon>> loadWeaponsFromMap(tmx::TileMap& tileMap);
+std::vector<std::unique_ptr<Armor>> loadArmorFromMap(tmx::TileMap& tileMap);
 
 #endif //CHOUI_ITEMSFROMMAP_H

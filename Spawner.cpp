@@ -17,7 +17,7 @@ Spawner::Spawner(int maxMobs, int xPos, int yPos, int hp, int str, int intel, fl
 
 Spawner::~Spawner() { }
 
-void Spawner::spawnMob(std::vector<Mob*>& mobMap){
+void Spawner::spawnMob(std::vector<std::unique_ptr<Mob>>& mobMap){
     int count = 0;
     std::string path;
     if(!mobMap.empty()){
@@ -35,7 +35,7 @@ void Spawner::spawnMob(std::vector<Mob*>& mobMap){
 
     if(count < maxMobSpawned){
         for (int i = 0; i < (maxMobSpawned-count); ++i) {
-            mobMap.push_back(new Mob(path, sf::Vector2f(xPosition,yPosition)));
+            mobMap.emplace_back(new Mob(path, sf::Vector2f(xPosition,yPosition)));
             mobMap[mobMap.size()-1]->setId(mobid);
             mobMap[mobMap.size()-1]->healthPoints = mobhp;
             mobMap[mobMap.size()-1]->maxHealthPoints = mobhp;

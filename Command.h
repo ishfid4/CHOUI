@@ -8,17 +8,18 @@
 #include <iostream>
 #include "Player.h"
 #include "Mob.h"
+#include <memory>
 
 class Command{
 public:
     Command();
     virtual ~Command(){};
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)) = 0;
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<std::unique_ptr<Mob>>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)) = 0;
 };
 
 class UpCommand : public Command{
 public:
-    virtual void execute(Entity&entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f, 0.f)){
+    virtual void execute(Entity&entity, sf::Time frameTime, std::vector<std::unique_ptr<Mob>>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f, 0.f)){
         entity.currentAnimation = &entity.walkingAnimationUp;
         movement.y -= entity.speed;
         entity.play(*entity.currentAnimation);
@@ -29,7 +30,7 @@ public:
 
 class DownCommand : public Command{
 public:
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<std::unique_ptr<Mob>>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
         entity.currentAnimation = &entity.walkingAnimationDown;
         movement.y += entity.speed;
         entity.play(*entity.currentAnimation);
@@ -40,7 +41,7 @@ public:
 
 class LeftCommand : public Command{
 public:
-    virtual void execute(Entity&entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f, 0.f)){
+    virtual void execute(Entity&entity, sf::Time frameTime, std::vector<std::unique_ptr<Mob>>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f, 0.f)){
         entity.currentAnimation = &entity.walkingAnimationLeft;
         movement.x -= entity.speed;
         entity.play(*entity.currentAnimation);
@@ -51,7 +52,7 @@ public:
 
 class RightCommand : public Command{
 public:
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<std::unique_ptr<Mob>>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
         entity.currentAnimation = &entity.walkingAnimationRight;
         movement.x += entity.speed;
         entity.play(*entity.currentAnimation);
@@ -62,7 +63,7 @@ public:
 
 class NoKeyCommand : public Command{
 public:
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<std::unique_ptr<Mob>>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
         entity.play(*entity.currentAnimation);
         entity.stop();
         entity.update(frameTime);
@@ -71,7 +72,7 @@ public:
 
 class PlayerAttackCommand : public Command{
 public:
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<std::unique_ptr<Mob>>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
         entity.play(*entity.currentAnimation);
         entity.stop();
         entity.update(frameTime);
@@ -94,7 +95,7 @@ public:
 
 class MobAttackCommand : public Command{
 public:
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<std::unique_ptr<Mob>>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){
         entity.play(*entity.currentAnimation);
         entity.stop();
         entity.update(frameTime);
@@ -117,12 +118,12 @@ public:
 
 class PickCommand : public Command{
 public:
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){}
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<std::unique_ptr<Mob>>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){}
 };
 
 class InventoryCommand : public Command{
 public:
-    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<Mob*>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){}
+    virtual void execute(Entity& entity, sf::Time frameTime, std::vector<std::unique_ptr<Mob>>& mobMap, Player& player, sf::Vector2f movement = sf::Vector2f(0.f,0.f)){}
 };
 
 #endif //CHOUI_COMMAND_H
