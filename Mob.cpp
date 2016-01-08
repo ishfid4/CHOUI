@@ -17,7 +17,7 @@ int Mob::getCollidable() const{
     return collidable;
 }
 
-int Mob::setCollidable(int col){
+void Mob::setCollidable(int col){
     collidable = col;
 }
 

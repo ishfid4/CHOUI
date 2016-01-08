@@ -14,7 +14,7 @@ public:
     Mob(std::string path, sf::Vector2f spawnCoordinates);
     ~Mob();
     int getCollidable() const;
-    int setCollidable(int col);
+    void setCollidable(int col);
     int getId() const;
     void setId(int iD);
 

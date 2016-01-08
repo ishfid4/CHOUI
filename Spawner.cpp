@@ -21,7 +21,7 @@ void Spawner::spawnMob(std::vector<std::unique_ptr<Mob>>& mobMap){
     int count = 0;
     std::string path;
     if(!mobMap.empty()){
-        for (int i = 0; i < mobMap.size(); ++i) {
+        for (u_int i = 0; i < mobMap.size(); ++i) {
             if(mobMap[i]->getId() == mobid)
                 count++;
         }
