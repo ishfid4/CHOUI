@@ -7,6 +7,18 @@
 
 UI::UI() {
     textureId = 0;
+    openedInv = false;
+    secondPress = false;
+
+    //font loading
+    if (!fontHalant.loadFromFile("assets/fonts/Halant-Regular.ttf"))
+        std::cout<<"Error loading Bangers.ttf\n";
+
+    //background of inv
+    invBackGround = sf::RectangleShape(sf::Vector2f(150,300));
+    invBackGround.setFillColor(sf::Color(0,205,255,165));
+    invBackGround.setOutlineColor(sf::Color(0,137,255,165));
+    invBackGround.setOutlineThickness(2);
 }
 
 UI::~UI() { }
@@ -64,4 +76,32 @@ void UI::setPlayerHP(Player& player, std::vector<std::unique_ptr<sf::Texture>>& 
         hpSprites[j]->setPosition(player.playerView.getCenter().x-(290-(j*32)),player.playerView.getCenter().y+250);
     }
 
+}
+
+void UI::setInventory(Command& command, Player& player) {
+    if(typeid(command).name() == typeid(InventoryCommand).name()){
+        if(secondPress && openedInv){
+            openedInv = false;
+            secondPress = false;
+            textVector.clear();
+//            for (u_int i = 0; i < player.inventory.size(); ++i) {
+//                textVector.erase(textVector.begin()-i);
+//            }
+        }else if(!secondPress && openedInv){
+            secondPress = true;
+        }else if(!secondPress && !openedInv){
+            for (u_int i = 0; i < player.inventory.size(); ++i) {
+                std::unique_ptr<sf::Text> itemTxt(new sf::Text);
+                itemTxt->setFont(fontHalant);
+                itemTxt->setString(player.inventory[i]->getName());
+                itemTxt->setCharacterSize(16);
+                textVector.push_back(std::move(itemTxt));
+            }
+            openedInv = true;
+        }
+    }
+
+    if((!secondPress && !openedInv)||(!secondPress && openedInv)){
+
+    }
 }

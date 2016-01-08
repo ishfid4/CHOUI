@@ -8,6 +8,7 @@
 
 #include "Entity.h"
 #include "Item.h"
+#include <memory>
 
 class Player : public Entity{
 public:
@@ -15,7 +16,7 @@ public:
     ~Player();
 
     sf::View playerView;
-    std::vector<Item*> inventory;
+    std::vector<std::unique_ptr<Item>> inventory;
 };
 
 #endif //CHOUI_NPC_H

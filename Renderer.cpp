@@ -29,45 +29,9 @@ Renderer::Renderer(){
     //DeadRedFilter
     rectangleFilter = sf::RectangleShape(sf::Vector2f(1920,1080));
     rectangleFilter.setFillColor(sf::Color(225,0,120,95));
-
-    openedInv = false;
-    secondPress = false;
-    invBackGround = sf::RectangleShape(sf::Vector2f(150,300));
-    invBackGround.setFillColor(sf::Color(0,205,255,165));
-    invBackGround.setOutlineColor(sf::Color(0,137,255,165));
-    invBackGround.setOutlineThickness(2);
 }
 
 Renderer::~Renderer(){}
-
-void Renderer::showInventory(Command& command, Player &player, sf::RenderWindow& window) {
-    if(typeid(command).name() == typeid(InventoryCommand).name()){
-        if(secondPress){
-            openedInv = false;
-            secondPress = false;
-            for (u_int i = 0; i < player.inventory.size(); ++i) {
-                textVector.erase(textVector.begin()-1);
-            }
-        }else if(!secondPress){
-            if(!openedInv) {
-                invBackGround.setPosition(player.getPosition().x - 200, player.getPosition().y - 200);
-                if(player.inventory.size()>0){
-                    window.draw(invBackGround);
-                    for (u_int i = 0; i < player.inventory.size(); ++i) {
-                        std::unique_ptr<sf::Text> itemTxt(new sf::Text);
-                        itemTxt->setFont(fontBangers);
-                        itemTxt->setString(player.inventory[i]->getName());
-                        itemTxt->setCharacterSize(16);
-                        itemTxt->setPosition(player.getPosition().x - 197, player.getPosition().y - 200 + (i * 18));
-                        textVector.push_back(std::move(itemTxt));
-                    }
-                    openedInv = true;
-                    secondPress = true;
-                }
-            }
-        }
-    }
-}
 
 void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std::vector<std::unique_ptr<Mob>>& mobMap, std::vector<std::unique_ptr<Weapon>>& weaponsMap, std::vector<std::unique_ptr<Armor>>& armorMap, Player& player, Command& command){
     sf::Event event;
@@ -82,10 +46,10 @@ void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std
     ui.loadHpTiles(hpTiles);
     ui.setPlayerHP(player,hpTiles,hpSprites);
     ui.setMobsHpBar(mobMap,mobHpBar);
+    ui.setInventory(command,player);
 
     window.clear();
     window.draw(tileMap);
-    window.draw(*weaponsMap[0]);
 
     if(!mobMap.empty()){
         for (u_int i = 0; i < mobMap.size(); i++) {
@@ -105,10 +69,13 @@ void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std
         }
     }
 
-    showInventory(command,player,window);
-
-    for (u_int j = 2; j < textVector.size(); ++j) {
-        window.draw(*textVector[j]);
+    if(ui.openedInv){
+        window.draw(ui.invBackGround);
+        for (u_int j = 0; j < ui.textVector.size(); ++j) {
+            ui.invBackGround.setPosition(player.getPosition().x - 200, player.getPosition().y - 200);
+            ui.textVector[j]->setPosition(player.getPosition().x - 197, player.getPosition().y - 200 + (j * 18));
+            window.draw(*ui.textVector[j]);
+        }
     }
 
     if(player.healthPoints > 0){

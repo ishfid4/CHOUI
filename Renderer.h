@@ -19,7 +19,6 @@ public:
     Renderer();
     ~Renderer();
     void renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std::vector<std::unique_ptr<Mob>>& mobMap, std::vector<std::unique_ptr<Weapon>>& weaponsMap, std::vector<std::unique_ptr<Armor>>& armorMap, Player& player, Command& command);
-    void showInventory(Command& command, Player &player, sf::RenderWindow& window);
 
 private:
     UI ui;
@@ -28,8 +27,6 @@ private:
 
     sf::Font fontBangers,fontRaleway;
     sf::RectangleShape rectangleFilter;
-    bool openedInv, secondPress;
-    sf::RectangleShape invBackGround;
 };
 
 
