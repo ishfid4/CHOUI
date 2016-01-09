@@ -15,6 +15,7 @@ Player::Player(std::string path, sf::Vector2f startingCoordinates, sf::Vector2f 
     defence = 0;
     basicAttackSpeed = 1;
     inventory.reserve(8);
+    openedInv = false;
 }
 
 Player::~Player() {}

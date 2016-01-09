@@ -69,11 +69,12 @@ void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std
         }
     }
 
-    if(ui.openedInv){
+    if(player.openedInv){
         window.draw(ui.invBackGround);
         for (u_int j = 0; j < ui.textVector.size(); ++j) {
             ui.invBackGround.setPosition(player.getPosition().x - 200, player.getPosition().y - 200);
             ui.textVector[j]->setPosition(player.getPosition().x - 197, player.getPosition().y - 200 + (j * 18));
+            ui.inventoryManagment(command, player);
             window.draw(*ui.textVector[j]);
         }
     }

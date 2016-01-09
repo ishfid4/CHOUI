@@ -21,14 +21,16 @@ public:
                      std::vector<std::unique_ptr<sf::Sprite>>& hpSprites);
     void setMobsHpBar(std::vector<std::unique_ptr<Mob>> &mobMap, std::vector<sf::RectangleShape*>& mobHpBar);
     void setInventory(Command& command, Player& player);
+    void inventoryManagment(Command& command, Player& player);
 
-    bool openedInv, secondPress;
+    bool secondPress;
     sf::RectangleShape invBackGround;
     std::vector<std::unique_ptr<sf::Text>> textVector;
 
 private:
     int textureId;
     sf::Font fontHalant;
+    u_long positionInInv;
 };
 
 

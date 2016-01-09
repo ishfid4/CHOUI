@@ -48,11 +48,14 @@ int main() {
         InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
         Command* command = inputHandler.handleInput(player);
-        command = obstructCollision.testObstructPlayerCollision(*command,mobMap);
-        itemCollision.testItemPlayerCollision(*command,player,weaponsMap,armorMap,tileMap);
-        command->execute(player,frameTime, mobMap, player);
 
-        mobAI.mobsMovement(mobMap, frameTime, tileMap, player, "Ground", "Collidable");
+        if(!player.openedInv){
+            command = obstructCollision.testObstructPlayerCollision(*command,mobMap);
+            itemCollision.testItemPlayerCollision(*command,player,weaponsMap,armorMap,tileMap);
+            command->execute(player,frameTime, mobMap, player);
+            mobAI.mobsMovement(mobMap, frameTime, tileMap, player, "Ground", "Collidable");
+        }
+
 
         renderer.renderWindow(window,tileMap,mobMap,weaponsMap,armorMap,player,*command);
     }

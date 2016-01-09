@@ -7,7 +7,6 @@
 
 UI::UI() {
     textureId = 0;
-    openedInv = false;
     secondPress = false;
 
     //font loading
@@ -19,6 +18,8 @@ UI::UI() {
     invBackGround.setFillColor(sf::Color(0,205,255,165));
     invBackGround.setOutlineColor(sf::Color(0,137,255,165));
     invBackGround.setOutlineThickness(2);
+
+    positionInInv = 0;
 }
 
 UI::~UI() { }
@@ -75,33 +76,38 @@ void UI::setPlayerHP(Player& player, std::vector<std::unique_ptr<sf::Texture>>& 
     for (u_int j = 0; j < hpSprites.size(); ++j) {
         hpSprites[j]->setPosition(player.playerView.getCenter().x-(290-(j*32)),player.playerView.getCenter().y+250);
     }
-
 }
 
 void UI::setInventory(Command& command, Player& player) {
     if(typeid(command).name() == typeid(InventoryCommand).name()){
-        if(secondPress && openedInv){
-            openedInv = false;
+        if(secondPress && player.openedInv){
+            player.openedInv = false;
             secondPress = false;
             textVector.clear();
-//            for (u_int i = 0; i < player.inventory.size(); ++i) {
-//                textVector.erase(textVector.begin()-i);
-//            }
-        }else if(!secondPress && openedInv){
+        }else if(!secondPress && player.openedInv){
             secondPress = true;
-        }else if(!secondPress && !openedInv){
+        }else if(!secondPress && !player.openedInv){
             for (u_int i = 0; i < player.inventory.size(); ++i) {
                 std::unique_ptr<sf::Text> itemTxt(new sf::Text);
                 itemTxt->setFont(fontHalant);
                 itemTxt->setString(player.inventory[i]->getName());
                 itemTxt->setCharacterSize(16);
+                if(i == positionInInv)
+                    itemTxt->setColor(sf::Color(255,94,224,255));
                 textVector.push_back(std::move(itemTxt));
             }
-            openedInv = true;
+            player.openedInv = true;
         }
     }
+}
 
-    if((!secondPress && !openedInv)||(!secondPress && openedInv)){
+void UI::inventoryManagment(Command& command, Player& player){
+    if(typeid(command).name() == typeid(UpCommand).name()){
+
+    }
+    if(typeid(command).name() == typeid(DownCommand).name()) {
+    }
+    if(typeid(command).name() == typeid(PickCommand).name()){
 
     }
 }
