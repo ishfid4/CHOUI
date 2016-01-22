@@ -87,6 +87,7 @@ void UI::setInventory(Command& command, Player& player) {
         }else if(!secondPress && player.openedInv){
             secondPress = true;
         }else if(!secondPress && !player.openedInv){
+            invBackGround.setPosition(player.getPosition().x - 200, player.getPosition().y - 200);
             for (u_int i = 0; i < player.inventory.size(); ++i) {
                 std::unique_ptr<sf::Text> itemTxt(new sf::Text);
                 itemTxt->setFont(fontHalant);
@@ -103,10 +104,21 @@ void UI::setInventory(Command& command, Player& player) {
 
 void UI::inventoryManagment(Command& command, Player& player){
     if(typeid(command).name() == typeid(UpCommand).name()){
+        if((positionInInv > 0) && (positionInInv <= textVector.size()-1)){
+            textVector[positionInInv]->setColor(sf::Color(255,255,255,255));
+            positionInInv--;
+            textVector[positionInInv]->setColor(sf::Color(255,94,224,255));
+        }
+    }
 
+    if(typeid(command).name() == typeid(DownCommand).name()){
+        if((positionInInv >= 0) && (positionInInv < textVector.size()-1)){
+            textVector[positionInInv]->setColor(sf::Color(255,255,255,255));
+            positionInInv++;
+            textVector[positionInInv]->setColor(sf::Color(255,94,224,255));
+        }
     }
-    if(typeid(command).name() == typeid(DownCommand).name()) {
-    }
+
     if(typeid(command).name() == typeid(PickCommand).name()){
 
     }

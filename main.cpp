@@ -11,14 +11,19 @@
 #include "MobAI.h"
 #include "Renderer.h"
 #include "Spawner.h"
+#include "Settings.h"
 
 using namespace std;
-
 int main() {
+    //load settings from file
+    Settings settings("settings.conf");
+    settings.load();
+    cout<<settings.x<<"x"<<settings.y<<" "<<settings.hz<<"\n";
+
     //Setting window and renderer
-    sf::Vector2i screenDimensions(800,600);
+    sf::Vector2i screenDimensions(settings.x,settings.y);
     sf::RenderWindow window(sf::VideoMode((u_int)screenDimensions.x, (u_int)screenDimensions.y), "CHOUI");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(settings.hz);
     Renderer renderer;
 
     //setting map
@@ -40,12 +45,12 @@ int main() {
     MobAI mobAI;
 
     tileMap.GetLayer("Weapon").GetTile(17,8).visible = false;
+    InputHandler inputHandler;
 
     while (window.isOpen()) {
         snakeSpawner.spawnMob(mobMap);
         Collision obstructCollision(tileMap, player, "Ground", "Collidable", mobMap);
         Collision itemCollision(tileMap, player, "Ground", "Collidable", mobMap);
-        InputHandler inputHandler;
         sf::Time frameTime = frameClock.restart();
         Command* command = inputHandler.handleInput(player);
 

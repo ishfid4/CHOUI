@@ -280,7 +280,7 @@
     <property name="ID" value="0"/>
     <property name="intReq" value="4"/>
     <property name="magicDMG" value="9"/>
-    <property name="name" value="Piczo Rozpierdalacz"/>
+    <property name="name" value="mace"/>
     <property name="physicalDMG" value="0"/>
     <property name="strReq" value="1"/>
    </properties>
@@ -290,7 +290,7 @@
     <property name="ID" value="1"/>
     <property name="intReq" value="1"/>
     <property name="magicDMG" value="0"/>
-    <property name="name" value="Lamacz Chujow"/>
+    <property name="name" value="Lamacz koci"/>
     <property name="physicalDMG" value="10"/>
     <property name="strReq" value="5"/>
    </properties>
@@ -300,7 +300,7 @@
     <property name="ID" value="2"/>
     <property name="intReq" value="2"/>
     <property name="magicDMG" value="2"/>
-    <property name="name" value="Analny Gwalciciel"/>
+    <property name="name" value="supe miecz"/>
     <property name="physicalDMG" value="9"/>
     <property name="strReq" value="4"/>
    </properties>

@@ -24,6 +24,8 @@ private:
     std::unique_ptr<PlayerAttackCommand> buttonA_;
     std::unique_ptr<PickCommand> buttonZ_;
     std::unique_ptr<InventoryCommand> buttonI_;
+    bool wasIPressed = false;
+    bool wasZPressed = false;
 };
 
 

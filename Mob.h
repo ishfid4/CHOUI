@@ -17,6 +17,7 @@ public:
     void setCollidable(int col);
     int getId() const;
     void setId(int iD);
+    Mob& operator--();
 
 private:
     int collidable, id;

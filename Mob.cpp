@@ -28,3 +28,8 @@ int Mob::getId() const {
 void Mob::setId(int iD) {
     id = iD;
 }
+
+Mob& Mob::operator--(){
+    healthPoints-=8;
+    return *this;
+}

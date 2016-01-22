@@ -35,10 +35,15 @@ Renderer::~Renderer(){}
 
 void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std::vector<std::unique_ptr<Mob>>& mobMap, std::vector<std::unique_ptr<Weapon>>& weaponsMap, std::vector<std::unique_ptr<Armor>>& armorMap, Player& player, Command& command){
     sf::Event event;
+
+    //Colsing window
     while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed)
-            window.close();
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::Escape)
+                window.close();
+        }
     }
+
     std::vector<std::unique_ptr<sf::Texture>> hpTiles;
     std::vector<std::unique_ptr<sf::Sprite>> hpSprites;
     std::vector<sf::RectangleShape*> mobHpBar;
@@ -70,6 +75,7 @@ void Renderer::renderWindow(sf::RenderWindow& window, tmx::TileMap& tileMap, std
     }
 
     if(player.openedInv){
+        ui.inventoryManagment(command,player);
         window.draw(ui.invBackGround);
         for (u_int j = 0; j < ui.textVector.size(); ++j) {
             ui.invBackGround.setPosition(player.getPosition().x - 200, player.getPosition().y - 200);

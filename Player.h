@@ -18,6 +18,7 @@ public:
     sf::View playerView;
     std::vector<std::unique_ptr<Item>> inventory;
     bool openedInv; //it needs to be here because if openedInv mob shouldnt move
+    Player& operator--();
 };
 
 #endif //CHOUI_NPC_H

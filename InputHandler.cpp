@@ -13,23 +13,30 @@ InputHandler::InputHandler() :
         buttonA_(new PlayerAttackCommand),
         buttonZ_(new PickCommand),
         buttonI_(new InventoryCommand)
-{ }
+{
+
+}
 
 Command* InputHandler::handleInput(Player& player) {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        return buttonUP_.get();
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        return buttonDOWN_.get();
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        return buttonRIGHT_.get();
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        return buttonLEFT_.get();
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        return buttonA_.get();
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-        return buttonZ_.get();
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::I))
-        return buttonI_.get();
+    Command* nextCommand = noButton_.get();
 
-    return noButton_.get();
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        nextCommand = buttonUP_.get();
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        nextCommand = buttonDOWN_.get();
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        nextCommand = buttonRIGHT_.get();
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        nextCommand = buttonLEFT_.get();
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        nextCommand = buttonA_.get();
+    else if(!wasZPressed && sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+        nextCommand = buttonZ_.get();
+    else if(!wasIPressed && sf::Keyboard::isKeyPressed(sf::Keyboard::I))
+        nextCommand = buttonI_.get();
+
+    wasIPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::I);
+    wasZPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Z);
+
+    return nextCommand;
 }
